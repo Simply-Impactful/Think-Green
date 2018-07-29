@@ -1,0 +1,70 @@
+service: cis-serverless-backend
+
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  environment:
+    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE_PERFORM_ACTIONS}"
+
+functions:
+  create:
+    handler: components/performActions/create.create
+    events:
+      - http:
+          path: components/performActions
+          method: post
+          cors: true
+
+  get:
+    handler: components/performActions/get.get
+    events:
+      - http:
+          path: components/performActions/{username}
+          method: get
+          cors: true
+
+  update:
+    handler: components/performActions/update.update
+    events:
+      - http:
+          path: components/performActions/{username}
+          method: put
+          cors: true
+
+  delete:
+    handler: components/performActions/delete.delete
+    events:
+      - http:
+          path: components/performActions/{username}
+          method: delete
+          cors: true
+
+resources:
+  Resources:
+    TodosDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.DYNAMODB_TABLE_PERFORM_ACTIONS}

@@ -1,0 +1,8 @@
+{
+  "name": "cis-backend",
+  "version": "1.0.0",
+  "description": "Serverless CRUD services exposing a REST HTTP interface",
+  "dependencies": {
+    "uuid": "^2.0.3"
+  }
+}
