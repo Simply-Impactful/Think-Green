@@ -26,13 +26,13 @@ module.exports.update = (event, context, callback) => {
   const params = {
     TableName: process.env.DYNAMODB_TABLE_ACTIONS,
     Key: {
-      actionName: event.pathParameters.actionName,
+      name: event.pathParameters.name,
     },
     ExpressionAttributeValues: {
-      ':frequencyPerDay': data.frequencyPerDay,
+      ':frequencyCadence': data.frequencyCadence,
       ':updatedAt': timestamp,
     },
-    UpdateExpression: 'SET frequencyPerDay = :frequencyPerDay, updatedAt = :updatedAt',
+    UpdateExpression: 'SET frequencyCadence = :frequencyCadence, updatedAt = :updatedAt',
     ReturnValues: 'UPDATED_NEW',
   };
 

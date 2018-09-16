@@ -1,0 +1,88 @@
+service: cis-serverless-backend-userActions
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: us-east-1
+  memorySize: 128 # Overwrite the default memory size. Default is 1024
+  timeout: 30 # The default is 6 seconds. Note: API Gateway current maximum is 30 seconds
+  deploymentBucket: 
+  
+  environment:
+    DYNAMODB_TABLE: userActions
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+
+package:
+  excludeDevDependencies: true
+
+functions:
+  create:
+    name: createUserActions
+    handler: create.create
+    events:
+      - http:
+          path: userActions
+          method: post
+          cors: true
+
+  get:
+    name: getUserActions
+    handler: get.get
+    events:
+      - http:
+          path: userActions/{name}
+          method: get
+          cors: true
+
+  list:
+    name: listUserActions
+    handler: list.list
+    events:
+      - http:
+          path: userActions
+          method: get
+          cors: true        
+
+  update:
+    name: updateUserActions
+    handler: update.update
+    events:
+      - http:
+          path: userActions/{name}
+          method: put
+          cors: true
+
+  delete:
+    name: deleteUserActions
+    handler: delete.delete
+    events:
+      - http:
+          path: userActions/{name}
+          method: delete
+          cors: true         
+
+resources:
+  Resources:
+    UDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: name
+            AttributeType: S        
+        KeySchema:
+          - AttributeName: name
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: userActions

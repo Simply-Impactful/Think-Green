@@ -24,13 +24,13 @@ module.exports.create = (event, context, callback) => {
   }
 
   const params = {
-    TableName: process.env.DYNAMODB_TABLE_PERFORM_ACTIONS,
+    TableName: userActions,
     Item: {
-      id: uuid.v1(),
-      actionName: data.actionName,
-      username: data.Username,
+      // id: uuid.v1(),
+      name: data.name,
+      username: data.username,
       pointsEarned: data.pointsEarned,
-      frequency: data.frequency,
+      recordedFrequency: data.recordedFrequency,
       createdAt: timestamp,
       updatedAt: timestamp,
     },

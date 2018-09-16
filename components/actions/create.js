@@ -7,11 +7,15 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 function ValidateInput(data){
   //TODO add input validation
+  return data;
 }
 
 module.exports.create = (event, context, callback) => {
+  console.log ("incoming event body" + JSON.stringify(event.body));
+  console.log ("incoming JSON event" + JSON.stringify(event));
   const timestamp = new Date().getTime();
   const data = JSON.parse(event.body);
+  console.log ("incoming payload" + data);
   if (!ValidateInput(data)) {
     console.error('Validation Failed');
     callback(null, {
@@ -24,18 +28,25 @@ module.exports.create = (event, context, callback) => {
 
   //TODO add more attributes
   const params = {
-    TableName: process.env.DYNAMODB_TABLE_ACTIONS,
+    TableName: actions,
     Item: {
-      id: uuid.v1(),
-      actionName: data.actionName,
-      frequencyPerDay: data.frequencyPerDay,
-      createdAt: timestamp,
-      updatedAt: timestamp,
+      // id: uuid.v1(),
+      name: data.actionName,
+      frequencyCadence: data.frequencyCadence,
+      eligiblePoints: data.eligiblePoints,
+      maxFrequency: data.maxFrequency,
+      funFact: data.funFact,
+      funFactImageUrl: data.funFactImageUrl,
+      tileIconUrl: data.tileIconUrl
+      // ,
+      // createdAt: timestamp,
+      // updatedAt: timestamp,
     },
   };
 
   // write the todo to the database
   dynamoDb.put(params, (error) => {
+    console.log("inside the ddb put");
     // handle potential errors
     if (error) {
       console.error(error);

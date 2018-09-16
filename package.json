@@ -2,7 +2,24 @@
   "name": "cis-backend",
   "version": "1.0.0",
   "description": "Serverless CRUD services exposing a REST HTTP interface",
+  "scripts": {
+    "clean": "rm -rf node_modules",
+    "deploy:cis": "sls deploy --stage cis --aws-profile cis",
+    "invoke-lambda": "aws --profile cis lambda invoke --function-name $npm_package_config_actionsFunctionName --region $npm_package_config_region --payload file://api-gateway-event.json lambda-invoke-response.json && cat lambda-invoke-response.json",
+    "lint": "eslint --parser-options=\"ecmaVersion:2017\" --ignore-path .gitignore .",
+    "lint:fix": "eslint --parser-options=\"ecmaVersion:2017\" --fix --ignore-path .gitignore .",
+    "test:unit": "echo no tests yet"
+  },
+  "pre-commit": [
+    "test",
+    "lint"
+  ],
+  "devDependencies": {
+    "eslint": "^5.2.0",
+    "serverless": "^1.7.0"
+  },
   "dependencies": {
-    "uuid": "^2.0.3"
+    "uuid": "^2.0.3",
+    "aws-sdk": "^2.258.1"
   }
 }

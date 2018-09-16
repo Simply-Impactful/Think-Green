@@ -4,23 +4,28 @@ const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-depe
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-module.exports.delete = (event, context, callback) => {
+function ValidateInput(event){
+  //TODO add input validation
+
+}
+
+module.exports.get = (event, context, callback) => {
   const params = {
-    TableName: actions,
+    TableName: userActions,
     Key: {
-      name: event.pathParameters.name,
+      username: event.pathParameters.username
     },
   };
 
-  // delete the action from the database
-  dynamoDb.delete(params, (error) => {
+  // fetch performActions from the database
+  dynamoDb.get(params, (error, result) => {
     // handle potential errors
     if (error) {
       console.error(error);
       callback(null, {
         statusCode: error.statusCode || 501,
         headers: { 'Content-Type': 'text/plain' },
-        body: 'Couldn\'t remove the action item.',
+        body: 'Couldn\'t fetch the performActions item for this user.',
       });
       return;
     }
@@ -28,7 +33,7 @@ module.exports.delete = (event, context, callback) => {
     // create a response
     const response = {
       statusCode: 200,
-      body: JSON.stringify({}),
+      body: JSON.stringify(result.Item),
     };
     callback(null, response);
   });

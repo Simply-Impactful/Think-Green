@@ -7,6 +7,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 function ValidateInput(data){
   //TODO add input validation
+  return data;
 }
 
 module.exports.create = (event, context, callback) => {
@@ -24,12 +25,12 @@ module.exports.create = (event, context, callback) => {
 
   //TODO add more attributes
   const params = {
-    TableName: process.env.DYNAMODB_TABLE_GROUPS,
+    TableName: groups,
     Item: {
-      id: uuid.v1(),
-      groupName: data.groupName, //add more attributes
-      groupLeader: data.username,
-      groupMembers: data.groupMembers, //how are users invited to join the group?
+      // id: uuid.v1(),
+      name: data.name, //add more attributes
+      leader: data.username,
+      members: data.groupMembers, //how are users invited to join the group?
       createdAt: timestamp,
       updatedAt: timestamp,
     },

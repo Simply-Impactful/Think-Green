@@ -8,7 +8,7 @@ module.exports.get = (event, context, callback) => {
   const params = {
     TableName: process.env.DYNAMODB_TABLE_ACTIONS,
     Key: {
-      actionName: event.pathParameters.actionName,
+      name: event.pathParameters.name,
     },
   };
 
