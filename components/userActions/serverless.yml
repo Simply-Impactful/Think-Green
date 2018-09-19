@@ -9,7 +9,7 @@ provider:
   deploymentBucket: 
   
   environment:
-    DYNAMODB_TABLE: userActions
+    USERACTIONS_DYNAMODB_TABLE: ${self:service}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -19,7 +19,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.USERACTIONS_DYNAMODB_TABLE}"
 
 package:
   excludeDevDependencies: true
@@ -77,12 +77,16 @@ resources:
       DeletionPolicy: Retain
       Properties:
         AttributeDefinitions:
-          - AttributeName: name
-            AttributeType: S        
+          - AttributeName: username
+            AttributeType: S
+          - AttributeName: createdAt
+            AttributeType: N         
         KeySchema:
-          - AttributeName: name
+          - AttributeName: username
             KeyType: HASH
+          - AttributeName: createdAt
+            KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: userActions
+        TableName: ${self:provider.environment.USERACTIONS_DYNAMODB_TABLE}

@@ -6,7 +6,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.get = (event, context, callback) => {
   const params = {
-    TableName: process.env.DYNAMODB_TABLE_ACTIONS,
+    TableName: process.env.ACTIONS_DYNAMODB_TABLE,
     Key: {
       name: event.pathParameters.name,
     },
@@ -24,7 +24,7 @@ module.exports.get = (event, context, callback) => {
       });
       return;
     }
-
+    console.log("returned response from db", result.Item);
     // create a response
     const response = {
       statusCode: 200,

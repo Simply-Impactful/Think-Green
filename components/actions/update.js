@@ -24,7 +24,7 @@ module.exports.update = (event, context, callback) => {
   }
 
   const params = {
-    TableName: process.env.DYNAMODB_TABLE_ACTIONS,
+    TableName: process.env.ACTIONS_DYNAMODB_TABLE,
     Key: {
       name: event.pathParameters.name,
     },

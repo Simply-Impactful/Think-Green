@@ -6,7 +6,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.list = (event, context, callback) => {
   const params = {
-    TableName: actions,
+    TableName: process.env.ACTIONS_DYNAMODB_TABLE,
   };
 
   // fetch action from the database

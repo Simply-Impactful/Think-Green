@@ -28,25 +28,26 @@ module.exports.create = (event, context, callback) => {
 
   //TODO add more attributes
   const params = {
-    TableName: actions,
+    TableName: process.env.ACTIONS_DYNAMODB_TABLE,
     Item: {
       // id: uuid.v1(),
-      name: data.actionName,
+      name: data.name,
       frequencyCadence: data.frequencyCadence,
       eligiblePoints: data.eligiblePoints,
       maxFrequency: data.maxFrequency,
       funFact: data.funFact,
       funFactImageUrl: data.funFactImageUrl,
-      tileIconUrl: data.tileIconUrl
-      // ,
-      // createdAt: timestamp,
-      // updatedAt: timestamp,
+      tileIconUrl: data.tileIconUrl,
+      createdAt: timestamp,
+      updatedAt: timestamp,
     },
   };
 
   // write the todo to the database
   dynamoDb.put(params, (error) => {
     console.log("inside the ddb put");
+    console.log("params", params);
+
     // handle potential errors
     if (error) {
       console.error(error);

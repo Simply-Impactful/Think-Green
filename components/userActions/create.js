@@ -7,10 +7,12 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 function ValidateInput(data){
   //TODO add input validation
+  return data;
 }
 
 
 module.exports.create = (event, context, callback) => {
+  const date = new Date();
   const timestamp = new Date().getTime();
   const data = JSON.parse(event.body);
   if (!ValidateInput(data)) {
@@ -24,15 +26,16 @@ module.exports.create = (event, context, callback) => {
   }
 
   const params = {
-    TableName: userActions,
+    TableName: process.env.USERACTIONS_DYNAMODB_TABLE,
     Item: {
-      // id: uuid.v1(),
-      name: data.name,
       username: data.username,
+      actionTaken: data.actionTaken,
+      email: data.email,
       pointsEarned: data.pointsEarned,
       recordedFrequency: data.recordedFrequency,
       createdAt: timestamp,
       updatedAt: timestamp,
+      date: date,
     },
   };
 

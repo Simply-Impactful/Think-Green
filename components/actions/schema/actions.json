@@ -1,0 +1,9 @@
+{
+    "name": "string",
+    "frequencyCadence": "string",
+    "eligiblePoints": "integer",
+    "maxFrequency": "integer",
+    "funFact": "String",
+    "funFactImageUrl": { "type": "string", "format": "url" },
+    "tileIconUrl": { "type": "string", "format": "url" }
+  }

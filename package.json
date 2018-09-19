@@ -5,7 +5,12 @@
   "scripts": {
     "clean": "rm -rf node_modules",
     "deploy:cis": "sls deploy --stage cis --aws-profile cis",
-    "invoke-lambda": "aws --profile cis lambda invoke --function-name $npm_package_config_actionsFunctionName --region $npm_package_config_region --payload file://api-gateway-event.json lambda-invoke-response.json && cat lambda-invoke-response.json",
+    "invoke-lambda-createActions": "aws --profile cis lambda invoke --function-name $npm_package_config_actionsFunctionName --region $npm_package_config_region --payload file://components/actions/data/create-actions.json lambda-invoke-response.json && cat lambda-invoke-response.json",
+    "invoke-lambda-getActions": "aws --profile cis lambda invoke --function-name $npm_package_config_getActionsFunctionName --region $npm_package_config_region --payload file://components/actions/data/get-actions.json lambda-invoke-response-get.json && cat lambda-invoke-response-get.json",
+    "invoke-lambda-listActions": "aws --profile cis lambda invoke --function-name $npm_package_config_listActionsFunctionName --region $npm_package_config_region --payload file://components/actions/data/list-actions.json lambda-invoke-response-list.json && cat lambda-invoke-response-list.json",
+    "invoke-lambda-createUserActions": "aws --profile cis lambda invoke --function-name $npm_package_config_useractionsFunctionName --region $npm_package_config_region --payload file://components/userActions/data/create-useractions.json lambda-invoke-response.json && cat lambda-invoke-response.json",
+    "invoke-lambda-getUserActions": "aws --profile cis lambda invoke --function-name $npm_package_config_getUserActionsFunctionName --region $npm_package_config_region --payload file://components/userActions/data/get-useractions.json lambda-invoke-response-get.json && cat lambda-invoke-response-get.json",
+    "invoke-lambda-listUserActions": "aws --profile cis lambda invoke --function-name $npm_package_config_listUserActionsFunctionName --region $npm_package_config_region --payload file://components/userActions/data/list-useractions.json lambda-invoke-response-list.json && cat lambda-invoke-response-list.json",
     "lint": "eslint --parser-options=\"ecmaVersion:2017\" --ignore-path .gitignore .",
     "lint:fix": "eslint --parser-options=\"ecmaVersion:2017\" --fix --ignore-path .gitignore .",
     "test:unit": "echo no tests yet"
@@ -21,5 +26,14 @@
   "dependencies": {
     "uuid": "^2.0.3",
     "aws-sdk": "^2.258.1"
+  },
+  "config": {
+    "region": "us-east-1",
+    "actionsFunctionName": "createActions",
+    "getActionsFunctionName": "getActions",
+    "listActionsFunctionName": "listActions",
+    "useractionsFunctionName": "createUserActions",
+    "getUserActionsFunctionName": "getUserActions",
+    "listUserActionsFunctionName": "listUserActions"
   }
 }

@@ -4,16 +4,17 @@ const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-depe
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-function ValidateInput(event){
-  //TODO add input validation
-
-}
+// function ValidateInput(data){
+//   //TODO add input validation
+//   return data;
+// }
 
 module.exports.get = (event, context, callback) => {
   const params = {
-    TableName: userActions,
+    TableName: process.env.USERACTIONS_DYNAMODB_TABLE,
     Key: {
-      username: event.pathParameters.username
+      username: event.pathParameters.username,
+      actionTaken: event.pathParameters.actionTaken
     },
   };
 
