@@ -78,19 +78,7 @@ resources:
       Properties:
         AttributeDefinitions:
           - AttributeName: name
-            AttributeType: S
-          # - AttributeName: maxFrequency
-          #   AttributeType: N
-          # - AttributeName: frequencyCadence
-          #   AttributeType: S
-          # - AttributeName: funFact
-          #   AttributeType: S
-          # - AttributeName: eligiblePoints
-          #   AttributeType: N
-          # - AttributeName: funFactImageUrl
-          #   AttributeType: S
-          # - AttributeName: tileIconUrl
-          #   AttributeType: S         
+            AttributeType: S        
         KeySchema:
           - AttributeName: name
             KeyType: HASH

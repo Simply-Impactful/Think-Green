@@ -12,9 +12,12 @@ function ValidateInput(data){
 
 
 module.exports.create = (event, context, callback) => {
-  const date = new Date();
+  const date = new Date(Date.now()).toLocaleString();
   const timestamp = new Date().getTime();
+  console.log ("incoming event body" + JSON.stringify(event.body));
+  console.log ("incoming JSON event" + JSON.stringify(event));
   const data = JSON.parse(event.body);
+  console.log ("incoming payload" + data);
   if (!ValidateInput(data)) {
     console.error('Validation Failed');
     callback(null, {
