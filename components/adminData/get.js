@@ -4,15 +4,22 @@ const AWS = require('aws-sdk') // eslint-disable-line import/no-extraneous-depen
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient()
 
+// function ValidateInput(data){
+//   //TODO add input validation
+//   return data;
+// }
+
 module.exports.get = (event, context, callback) => {
   const params = {
-    TableName: process.env.ACTIONS_DYNAMODB_TABLE,
+    TableName: process.env.USERACTIONS_DYNAMODB_TABLE,
     Key: {
-      name: event.pathParameters.name
+      username: event.pathParameters.username
+      // ,
+      // actionTaken: event.pathParameters.actionTaken
     }
   }
 
-  // fetch action from the database
+  // fetch performActions from the database
   dynamoDb.get(params, (error, result) => {
     // handle potential errors
     if (error) {
@@ -20,11 +27,11 @@ module.exports.get = (event, context, callback) => {
       callback(null, {
         statusCode: error.statusCode || 501,
         headers: { 'Content-Type': 'text/plain' },
-        body: 'Couldn\'t fetch the action item.'
+        body: 'Couldn\'t fetch the performActions item for this user.'
       })
       return
     }
-    console.log('returned response from db', result.Item)
+
     // create a response
     const response = {
       statusCode: 200,

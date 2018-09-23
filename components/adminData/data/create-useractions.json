@@ -1,13 +1,12 @@
 {
-    "httpMethod": "GET",
-    "body": "{}",
+    "httpMethod": "POST",
+    "body": "{\r\n  \"username\": \"johndoe12\",\r\n  \"actionTaken\": \"no-straws\",\r\n  \"email\": \"abc@gmail.com\",\r\n  \"pointsEarned\": 5,\r\n  \"recordedFrequency\": 2\r\n}",
     
     "path": "/userActions",
     "resource": "/",
     "queryStringParameters": {
     },
     "pathParameters": {
-        "username": "johndoe12"
     },
     "headers": {
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
@@ -48,6 +47,6 @@
             "user": ""
         },
         "resourcePath": "/userActions",
-        "httpMethod": "GET"
+        "httpMethod": "POST"
     }
 }

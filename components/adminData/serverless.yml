@@ -1,4 +1,4 @@
-service: serverless-backend-userActions
+service: serverless-backend-adminData
 
 provider:
   name: aws
@@ -9,7 +9,7 @@ provider:
   deploymentBucket: 
   
   environment:
-    USERACTIONS_DYNAMODB_TABLE: ${self:service}
+    ADMIN_DATA_DYNAMODB_TABLE: ${self:service}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -19,54 +19,54 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.USERACTIONS_DYNAMODB_TABLE}"
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.ADMIN_DATA_DYNAMODB_TABLE}"
 
 package:
   excludeDevDependencies: true
 
 functions:
   create:
-    name: createUserActions
+    name: createAdminData
     handler: create.create
     events:
       - http:
-          path: userActions
+          path: adminData
           method: post
           cors: true
 
   get:
-    name: getUserActions
+    name: getAdminData
     handler: get.get
     events:
       - http:
-          path: userActions/{username}
+          path: adminData/{username}
           method: get
           cors: true
 
   list:
-    name: listUserActions
+    name: listAdminData
     handler: list.list
     events:
       - http:
-          path: userActions
+          path: adminData
           method: get
           cors: true        
 
   # update:
-  #   name: updateUserActions
+  #   name: updateadminData
   #   handler: update.update
   #   events:
   #     - http:
-  #         path: userActions/{name}
+  #         path: adminData/{name}
   #         method: put
   #         cors: true
 
   # delete:
-  #   name: deleteUserActions
+  #   name: deleteadminData
   #   handler: delete.delete
   #   events:
   #     - http:
-  #         path: userActions/{name}
+  #         path: adminData/{name}
   #         method: delete
   #         cors: true         
 
@@ -89,4 +89,4 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: ${self:provider.environment.USERACTIONS_DYNAMODB_TABLE}
+        TableName: ${self:provider.environment.adminData_DYNAMODB_TABLE}

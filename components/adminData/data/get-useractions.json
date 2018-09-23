@@ -1,13 +1,14 @@
 {
     "httpMethod": "GET",
-    "body": "{}",
+    "body": "{\r\n  \"name\": \"no-plastics\",\r\n  \"frequencyCadence\": \"perDay\",\r\n  \"eligiblePoints\": 5,\r\n  \"maxFrequency\": 3,\r\n  \"funFact\": \"Americans use 300000 straws a sec\",\r\n  \"funFactImageUrl\": \"https:\/\/s3.amazonaws.com\/simply-impactful-image-data\/IMG_20180828_152438%5B1%5D.jpg\",\r\n  \"tileIconUrl\": \"https:\/\/s3.amazonaws.com\/simply-impactful-image-data\/IMG_20180828_152438%5B1%5D.jpg\"\r\n}",
     
-    "path": "/userActions",
+    "path": "/actions",
     "resource": "/",
     "queryStringParameters": {
     },
     "pathParameters": {
-        "username": "johndoe12"
+        "username": "no-plastics"
+
     },
     "headers": {
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
@@ -47,7 +48,7 @@
             "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36",
             "user": ""
         },
-        "resourcePath": "/userActions",
+        "resourcePath": "/actions",
         "httpMethod": "GET"
     }
 }
