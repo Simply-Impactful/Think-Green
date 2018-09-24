@@ -4,7 +4,7 @@ const AWS = require('aws-sdk') // eslint-disable-line import/no-extraneous-depen
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient()
 
-function ValidateInput (data) {
+function validateInput (data) {
   // TODO add input validation
   return data
 }
@@ -12,11 +12,11 @@ function ValidateInput (data) {
 module.exports.create = (event, context, callback) => {
   const date = new Date(Date.now()).toLocaleString()
   const timestamp = new Date().getTime()
-  console.log('incoming event body' + JSON.stringify(event.body))
-  console.log('incoming JSON event' + JSON.stringify(event))
+  console.log(`incoming event body${  JSON.stringify(event.body)}`)
+  console.log(`incoming JSON event${  JSON.stringify(event)}`)
   const data = JSON.parse(event.body)
-  console.log('incoming payload' + data)
-  if (!ValidateInput(data)) {
+  console.log(`incoming payload${  data}`)
+  if (!validateInput(data)) {
     console.error('Validation Failed')
     callback(null, {
       statusCode: 400,
@@ -36,7 +36,7 @@ module.exports.create = (event, context, callback) => {
       recordedFrequency: data.recordedFrequency,
       createdAt: timestamp,
       updatedAt: timestamp,
-      date: date
+      date
     }
   }
 
