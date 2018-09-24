@@ -2,7 +2,7 @@
 
 const AWS = require('aws-sdk') // eslint-disable-line import/no-extraneous-dependencies
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient()
+const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 // function ValidateInput(data){
 //   //TODO add input validation
@@ -12,12 +12,14 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient()
 module.exports.get = (event, context, callback) => {
   const params = {
     TableName: process.env.USERACTIONS_DYNAMODB_TABLE,
-    KeyConditionExpression: event.pathParameters.username
-    // Key: {
-    //   username: event.pathParameters.username,
-    //   actionTaken: event.queryStringParameters.actionTaken,
-    // },
-  }
+    KeyConditionExpression: "#user = :username",
+    ExpressionAttributeNames:{
+      "#user": "username"
+    },
+    ExpressionAttributeValues: {
+      ":username": event.pathParameters.username
+    }
+  };
 
   // fetch performActions from the database
   dynamoDb.query(params, (error, result) => {
@@ -31,11 +33,23 @@ module.exports.get = (event, context, callback) => {
       })
       return
     }
+    console.log("starting computation", result.Items);
+    const finalResult = result.Items;
+
+        
+let score = 0;
+    if (!result.Items.length === 0){
+    for (let i=0; i < result.Items.length; i+=1){
+      score += result.Items[i].pointsEarned;
+     }
+     finalResult.push({totalPoints: score});
+    }
+    console.log("final response", finalResult);
 
     // create a response
     const response = {
       statusCode: 200,
-      body: JSON.stringify(result.Item)
+      body: JSON.stringify(finalResult)
     }
     callback(null, response)
   })
