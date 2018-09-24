@@ -5,6 +5,7 @@
   "scripts": {
     "clean": "rm -rf node_modules",
     "deploy:cis": "sls deploy --stage cis --aws-profile cis",
+    "preCommit": "npm run lint && npm run test",
     "invoke-lambda-createActions": "aws --profile cis lambda invoke --function-name $npm_package_config_actionsFunctionName --region $npm_package_config_region --payload file://components/actions/data/create-actions.json lambda-invoke-response.json && cat lambda-invoke-response.json",
     "invoke-lambda-getActions": "aws --profile cis lambda invoke --function-name $npm_package_config_getActionsFunctionName --region $npm_package_config_region --payload file://components/actions/data/get-actions.json lambda-invoke-response-get.json && cat lambda-invoke-response-get.json",
     "invoke-lambda-listActions": "aws --profile cis lambda invoke --function-name $npm_package_config_listActionsFunctionName --region $npm_package_config_region --payload file://components/actions/data/list-actions.json lambda-invoke-response-list.json && cat lambda-invoke-response-list.json",
@@ -15,10 +16,6 @@
     "lint:fix": "eslint --parser-options=\"ecmaVersion:2017\" --fix --ignore-path .gitignore .",
     "test:unit": "echo no tests yet"
   },
-  "pre-commit": [
-    "npm run test",
-    "npm run lint"
-  ],
   "devDependencies": {
     "eslint": "^5.6.0",
     "eslint-config-standard": "^12.0.0",
