@@ -1,11 +1,10 @@
 'use strict'
 
-const uuid = require('uuid')
 const AWS = require('aws-sdk') // eslint-disable-line import/no-extraneous-dependencies
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient()
 
-function ValidateInput (data) {
+function validateInput (data) {
   // TODO add input validation
   return data
 }
@@ -13,7 +12,7 @@ function ValidateInput (data) {
 module.exports.create = (event, context, callback) => {
   const timestamp = new Date().getTime()
   const data = JSON.parse(event.body)
-  if (!ValidateInput(data)) {
+  if (!validateInput(data)) {
     console.error('Validation Failed')
     callback(null, {
       statusCode: 400,

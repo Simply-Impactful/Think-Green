@@ -4,7 +4,7 @@
   "description": "Serverless CRUD services exposing a REST HTTP interface",
   "scripts": {
     "clean": "rm -rf node_modules",
-    "deploy:cis": "sls deploy --stage cis --aws-profile cis",  
+    "deploy:cis": "sls deploy --stage cis --aws-profile cis",
     "invoke-lambda-createActions": "aws --profile cis lambda invoke --function-name $npm_package_config_actionsFunctionName --region $npm_package_config_region --payload file://components/actions/data/create-actions.json lambda-invoke-response.json && cat lambda-invoke-response.json",
     "invoke-lambda-getActions": "aws --profile cis lambda invoke --function-name $npm_package_config_getActionsFunctionName --region $npm_package_config_region --payload file://components/actions/data/get-actions.json lambda-invoke-response-get.json && cat lambda-invoke-response-get.json",
     "invoke-lambda-listActions": "aws --profile cis lambda invoke --function-name $npm_package_config_listActionsFunctionName --region $npm_package_config_region --payload file://components/actions/data/list-actions.json lambda-invoke-response-list.json && cat lambda-invoke-response-list.json",
@@ -13,20 +13,30 @@
     "invoke-lambda-listUserActions": "aws --profile cis lambda invoke --function-name $npm_package_config_listUserActionsFunctionName --region $npm_package_config_region --payload file://components/userActions/data/list-useractions.json lambda-invoke-response-list.json && cat lambda-invoke-response-list.json",
     "lint": "eslint --parser-options=\"ecmaVersion:2017\" --ignore-path .gitignore .",
     "lint:fix": "eslint --parser-options=\"ecmaVersion:2017\" --fix --ignore-path .gitignore .",
-    "test:unit": "echo no tests yet",
-    "lint-staged": "lint-staged"
+    "test:unit": "echo no tests yet"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
-    "components/**/*.js": "eslint"
-   },
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
   "pre-commit": "lint-staged",
   "devDependencies": {
     "eslint": "^5.6.0",
+    "eslint-config-okonet": "^5.0.1",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
+    "husky": "^1.0.0-rc.15",
+    "lint-staged": "^7.3.0",
     "serverless": "^1.7.0"
   },
   "dependencies": {
