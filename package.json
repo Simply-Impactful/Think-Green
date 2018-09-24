@@ -16,8 +16,8 @@
     "test:unit": "echo no tests yet"
   },
   "pre-commit": [
-    "test",
-    "lint"
+    "npm run test",
+    "npm run lint"
   ],
   "devDependencies": {
     "eslint": "^5.6.0",
