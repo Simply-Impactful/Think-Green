@@ -14,8 +14,11 @@
     "lint": "eslint --parser-options=\"ecmaVersion:2017\" --ignore-path .gitignore .",
     "lint:fix": "eslint --parser-options=\"ecmaVersion:2017\" --fix --ignore-path .gitignore .",
     "test:unit": "echo no tests yet",
-    "preCommit": "npm run lint && npm run test"
+    "preCommit": "eslint"
   },
+  "lint-staged": {
+    "*.js": "eslint"
+   },
   "devDependencies": {
     "eslint": "^5.6.0",
     "eslint-config-standard": "^12.0.0",
