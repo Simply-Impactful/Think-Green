@@ -6,14 +6,10 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient()
 
 function validateInput (event) {
   const req = JSON.parse((event.body));
-
-    
-const name = req.username;
-
-    
-let bool = true; 
- if (name === undefined) {
-   console.log('name is undefined');
+  const { username } = req;
+  let bool = true; 
+ if (username === undefined) {
+   console.log('username is undefined');
    bool = false;
    }
    return bool;
