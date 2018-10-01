@@ -19,6 +19,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
+        - dynamodb:BatchWriteItem
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.ADMIN_DATA_DYNAMODB_TABLE}"
 
 package:
@@ -34,14 +35,14 @@ functions:
           method: post
           cors: true
 
-  get:
-    name: getAdminData
-    handler: get.get
-    events:
-      - http:
-          path: adminData/{username}
-          method: get
-          cors: true
+  # get:
+  #   name: getAdminData
+  #   handler: get.get
+  #   events:
+  #     - http:
+  #         path: adminData/{username}
+  #         method: get
+  #         cors: true
 
   list:
     name: listAdminData
@@ -77,16 +78,16 @@ resources:
       DeletionPolicy: Retain
       Properties:
         AttributeDefinitions:
-          - AttributeName: username
+          - AttributeName: type
             AttributeType: S
-          - AttributeName: createdAt
-            AttributeType: N         
+          - AttributeName: createdDate
+            AttributeType: N        
         KeySchema:
-          - AttributeName: username
+          - AttributeName: type
             KeyType: HASH
-          - AttributeName: createdAt
+          - AttributeName: createdDate
             KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: ${self:provider.environment.adminData_DYNAMODB_TABLE}
+        TableName: ${self:provider.environment.ADMIN_DATA_DYNAMODB_TABLE}

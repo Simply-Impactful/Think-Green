@@ -1,6 +1,6 @@
 {
     "httpMethod": "POST",
-    "body": "{\r\n  \"name\": \"save-water\",\r\n  \"frequencyCadence\": \"perDay\",\r\n  \"eligiblePoints\": 5,\r\n  \"maxFrequency\": 3,\r\n  \"funFact\": \"Americans use 300000 straws a sec\",\r\n  \"funFactImageUrl\": \"https:\/\/s3.amazonaws.com\/simply-impactful-image-data\/IMG_20180828_152438%5B1%5D.jpg\",\r\n  \"tileIconUrl\": \"https:\/\/s3.amazonaws.com\/simply-impactful-image-data\/IMG_20180828_152438%5B1%5D.jpg\"\r\n}",
+    "body": "{\r\n  \"name\": \"save-paper\",\r\n  \"frequencyCadence\": \"perDay\",\r\n  \"eligiblePoints\": 5,\r\n  \"maxFrequency\": 3,\r\n  \"funFact\": \"Americans use 300000 straws a sec\",\r\n  \"funFactImageUrl\": \"https:\/\/s3.amazonaws.com\/simply-impactful-image-data\/IMG_20180828_152438%5B1%5D.jpg\",\r\n  \"tileIconUrl\": \"https:\/\/s3.amazonaws.com\/simply-impactful-image-data\/IMG_20180828_152438%5B1%5D.jpg\"\r\n}",
     
     "path": "/actions",
     "resource": "/",

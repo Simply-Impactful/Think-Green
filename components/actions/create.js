@@ -4,9 +4,16 @@ const AWS = require('aws-sdk') // eslint-disable-line import/no-extraneous-depen
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient()
 
-function validateInput (data) {
-  // TODO add input validation
-  return data
+function validateInput (event) {
+ const req = JSON.parse((event.body));
+  const { name } = req;
+  console.log('name is:', name);
+  let bool = true; 
+if (name === undefined) {
+  console.log('name is undefined');
+  bool = false;
+  }
+  return bool;
 }
 
 module.exports.create = (event, context, callback) => {
@@ -15,7 +22,7 @@ module.exports.create = (event, context, callback) => {
   const timestamp = new Date().getTime()
   const data = JSON.parse(event.body)
   console.log(`incoming payload${  data}`)
-  if (!validateInput(data)) {
+  if (!validateInput(event)) {
     console.error('Validation Failed')
     callback(null, {
       statusCode: 400,

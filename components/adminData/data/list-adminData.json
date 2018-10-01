@@ -1,8 +1,8 @@
 {
-    "httpMethod": "POST",
-    "body": "{\r\n  \"username\": \"johndoe12\",\r\n  \"actionTaken\": \"no-straws\",\r\n  \"email\": \"abc@gmail.com\",\r\n  \"pointsEarned\": 5,\r\n  \"recordedFrequency\": 2\r\n}",
+    "httpMethod": "GET",
+    "body": "{}",
     
-    "path": "/userActions",
+    "path": "/adminData",
     "resource": "/",
     "queryStringParameters": {
     },
@@ -46,7 +46,7 @@
             "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36",
             "user": ""
         },
-        "resourcePath": "/userActions",
-        "httpMethod": "POST"
+        "resourcePath": "/adminData",
+        "httpMethod": "GET"
     }
 }

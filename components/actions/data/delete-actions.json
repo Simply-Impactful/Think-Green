@@ -1,8 +1,8 @@
 {
     "httpMethod": "POST",
-    "body": "{\r\n  \"username\": \"johndoe14\",\r\n  \"actionTaken\": \"no-plastic\",\r\n  \"email\": \"abc@gmail.com\",\r\n  \"zipcode\": \"03054\",\r\n  \"pointsEarned\": 5,\r\n  \"recordedFrequency\": 2\r\n}",
+    "body": "[{\r\n  \"name\": \"save-water\"\r\n},\r\n{\r\n  \"name\": \"save-paper\"\r\n}]",
     
-    "path": "/userActions",
+    "path": "/actions/delete",
     "resource": "/",
     "queryStringParameters": {
     },
@@ -46,7 +46,7 @@
             "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36",
             "user": ""
         },
-        "resourcePath": "/userActions",
+        "resourcePath": "/actions/delete",
         "httpMethod": "POST"
     }
 }

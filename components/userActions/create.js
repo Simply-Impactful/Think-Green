@@ -4,19 +4,29 @@ const AWS = require('aws-sdk') // eslint-disable-line import/no-extraneous-depen
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient()
 
-function validateInput (data) {
-  // TODO add input validation
-  return data
-}
+function validateInput (event) {
+  const req = JSON.parse((event.body));
+
+    
+const name = req.username;
+
+    
+let bool = true; 
+ if (name === undefined) {
+   console.log('name is undefined');
+   bool = false;
+   }
+   return bool;
+ }
 
 module.exports.create = (event, context, callback) => {
-  const date = new Date(Date.now()).toLocaleString()
+  const date = new Date(Date.now()).toLocaleString().slice(0,10);
   const timestamp = new Date().getTime()
   console.log(`incoming event body${  JSON.stringify(event.body)}`)
   console.log(`incoming JSON event${  JSON.stringify(event)}`)
   const data = JSON.parse(event.body)
   console.log(`incoming payload${  data}`)
-  if (!validateInput(data)) {
+  if (!validateInput(event)) {
     console.error('Validation Failed')
     callback(null, {
       statusCode: 400,
@@ -32,6 +42,7 @@ module.exports.create = (event, context, callback) => {
       username: data.username,
       actionTaken: data.actionTaken,
       email: data.email,
+      zipcode: data.zipcode,
       pointsEarned: data.pointsEarned,
       recordedFrequency: data.recordedFrequency,
       createdAt: timestamp,

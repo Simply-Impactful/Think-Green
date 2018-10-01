@@ -1,13 +1,12 @@
 {
-    "httpMethod": "GET",
-    "body": "{\r\n  \"name\": \"no-straws\",\r\n  \"frequencyCadence\": \"perDay\",\r\n  \"eligiblePoints\": 5,\r\n  \"maxFrequency\": 3,\r\n  \"funFact\": \"Americans use 300000 straws a sec\",\r\n  \"funFactImageUrl\": \"https:\/\/s3.amazonaws.com\/simply-impactful-image-data\/IMG_20180828_152438%5B1%5D.jpg\",\r\n  \"tileIconUrl\": \"https:\/\/s3.amazonaws.com\/simply-impactful-image-data\/IMG_20180828_152438%5B1%5D.jpg\"\r\n}",
+    "httpMethod": "POST",
+    "body": "[{ \r\n   \"type\": \"Non-Profit\",\r\n   \"subType\": \"Entire Company\"\r\n},\r\n{ \r\n   \"type\": \"Non-Profit\",\r\n   \"subType\": \"Department\"\r\n}]",
     
-    "path": "/actions",
+    "path": "/adminData",
     "resource": "/",
     "queryStringParameters": {
     },
     "pathParameters": {
-        "name": "no-straws"
     },
     "headers": {
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
@@ -47,7 +46,7 @@
             "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36",
             "user": ""
         },
-        "resourcePath": "/actions",
-        "httpMethod": "GET"
+        "resourcePath": "/adminData",
+        "httpMethod": "POST"
     }
 }

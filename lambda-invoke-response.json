@@ -1,1 +1,1 @@
-{"statusCode":200,"body":"{\"username\":\"johndoe13\",\"actionTaken\":\"no-plastic\",\"email\":\"abc@gmail.com\",\"pointsEarned\":5,\"recordedFrequency\":2,\"createdAt\":1537758296755,\"updatedAt\":1537758296755,\"date\":\"2018-9-24 03:04:56\"}"}
+{"statusCode":400,"headers":{"Content-Type":"text/plain"},"body":"Couldn't create the adminData item."}
