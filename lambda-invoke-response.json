@@ -1,1 +1,1 @@
-{"statusCode":400,"headers":{"Content-Type":"text/plain"},"body":"Couldn't create the adminData item."}
+{"statusCode":200,"body":"{\"data\":{\"UnprocessedItems\":{}}}"}
