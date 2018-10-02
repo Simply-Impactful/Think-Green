@@ -35,10 +35,11 @@ module.exports.get = (event, context, callback) => {
     }
     console.log("starting computation", result.Items);
     const finalResult = result.Items;
-
         
-let score = 0;
-    if (!result.Items.length === 0){
+  let score = 0;
+  const resultLength = finalResult.length;
+    if (resultLength > 0){
+      console.log ("entering for loop")
     for (let i=0; i < result.Items.length; i+=1){
       score += result.Items[i].pointsEarned;
      }
@@ -49,7 +50,7 @@ let score = 0;
     // create a response
     const response = {
       statusCode: 200,
-      body: JSON.stringify(finalResult)
+      body: (finalResult)
     }
     callback(null, response)
   })

@@ -1,1 +1,1 @@
-{"statusCode":200,"body":"{\"data\":{\"UnprocessedItems\":{}}}"}
+{"statusCode":200,"body":[{"subType":"Department","createdDate":1538510499536,"updatedAt":1538510499536,"type":"Non-Profit"},{"subType":"Entire Company","createdDate":1538510499536,"updatedAt":1538510499536,"type":"Non-Profit"}]}

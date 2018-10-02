@@ -4,16 +4,16 @@ const AWS = require('aws-sdk') // eslint-disable-line import/no-extraneous-depen
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient()
 
-function ValidateInput (data) {
-  // TODO add input validation
+function validateInput (data) {
+  return data;
 }
 
 module.exports.update = (event, context, callback) => {
   const timestamp = new Date().getTime()
-  const data = JSON.parse(event.body)
+   const data = JSON.parse(event.body)
 
   // validation
-  if (!ValidateInput(data)) {
+  if (!validateInput(data)) {
     console.error('Validation Failed')
     callback(null, {
       statusCode: 400,
@@ -52,7 +52,7 @@ module.exports.update = (event, context, callback) => {
     // create a response
     const response = {
       statusCode: 200,
-      body: JSON.stringify(result.Attributes)
+      body: (result.Attributes)
     }
     callback(null, response)
   })
