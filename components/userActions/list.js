@@ -23,32 +23,6 @@ module.exports.list = (event, context, callback) => {
       return;
     }
     console.log("result from ddb", result.Items);
-    // const finalResult = result.Items;
-    // console.log("finalresult", finalResult);    
-
-    // //Transforming the response, to be refactored into a separate class
-    // var users = [];
-    // for (let i=0; i < resultLength; i+=1){
-    //   //let index = result.Items[i];
-    //   //console.log("index", index)
-    //   users.push(result.Items[i].username);
-    // }
-    // console.log(" users", users);
-    // var distinctUsers = new Set(users)
-    // console.log("distinct users", distinctUsers);
-
-      //   let outputResponse = [];
-  //   for (let i=o; i < resultLength; i+=1){
-  //     for (let j=o; j < distinctUsers.length; j+=1){
-  //        if (finalResult[i].username === distinctUsers[j]){
-  //         let userAction = {
-  //           user: distinctUsers[j],
-
-  //         } 
-  //         outputResponse.push
-  //        }
-  //   }
-  // }
 
     const scheme = {
       "$group[userActions](username)": {
@@ -70,58 +44,75 @@ module.exports.list = (event, context, callback) => {
     const parsedResult = shape.parse(result.Items, scheme);
     console.log("hierarchical resultset", JSON.stringify(parsedResult.userActions));// todo-divya test with empty data
 
+  // sample json response
   //   {  
   //     "userAction":[  
   //        {  
-  //           "username":"divya17",
-  //           "email":"abc@gmail.com",
-  //           "zipcode":"03054",
-  //           "actionsTaken":[  
-  //              {  
-  //                 "actionTaken":"save-water",
-  //                 "recordedFrequency":2,
-  //                 "pointsEarned":5,
-  //                 "carbonPointsEarned":10000
-  //              },
-  //              {  
-  //                 "actionTaken":"no-straws",
-  //                 "recordedFrequency":2,
-  //                 "pointsEarned":5,
-  //                 "carbonPointsEarned":10000
-  //              },
-  //              {  
-  //                 "actionTaken":"no-plastic",
-  //                 "recordedFrequency":2,
-  //                 "pointsEarned":5,
-  //                 "carbonPointsEarned":10000
-  //              }
-  //           ]
+  //     "username":"divya17",
+  //     "email":"abc@gmail.com",
+  //     "zipcode":"03054",
+  //     "actionsTaken":[  
+  //        {  
+  //           "actionTaken":"save-water",
+  //           "recordedFrequency":2,
+  //           "pointsEarned":5,
+  //           "carbonPointsEarned":10000,
+  //           "createdAt":1538939587993,
+  //           "date":"2018-10-7 "
   //        },
   //        {  
-  //           "username":"divya16",
-  //           "email":"abc@gmail.com",
-  //           "zipcode":"03054",
-  //           "actionsTaken":[  
-  //              {  
-  //                 "actionTaken":"no-straws",
-  //                 "recordedFrequency":2,
-  //                 "pointsEarned":5,
-  //                 "carbonPointsEarned":10000
-  //              },
-  //              {  
-  //                 "actionTaken":"no-plastic",
-  //                 "recordedFrequency":2,
-  //                 "pointsEarned":5,
-  //                 "carbonPointsEarned":10000
-  //              },
-  //              {  
-  //                 "actionTaken":"save-water",
-  //                 "recordedFrequency":2,
-  //                 "pointsEarned":5,
-  //                 "carbonPointsEarned":10000
-  //              }
-  //           ]
+  //           "actionTaken":"no-straws",
+  //           "recordedFrequency":2,
+  //           "pointsEarned":5,
+  //           "carbonPointsEarned":10000,
+  //           "createdAt":1538939603687,
+  //           "date":"2018-10-7 "
+  //        },
+  //        {  
+  //           "actionTaken":"no-plastic",
+  //           "recordedFrequency":2,
+  //           "pointsEarned":5,
+  //           "carbonPointsEarned":10000,
+  //           "createdAt":1538939614765,
+  //           "date":"2018-10-7 "
   //        }
+  //     ],
+  //     "totalPoints":15,
+  //     "totalCarbonPoints":30000
+  //  },
+  //  {  
+  //     "username":"divya16",
+  //     "email":"abc@gmail.com",
+  //     "zipcode":"03054",
+  //     "actionsTaken":[  
+  //        {  
+  //           "actionTaken":"no-straws",
+  //           "recordedFrequency":2,
+  //           "pointsEarned":5,
+  //           "carbonPointsEarned":10000,
+  //           "createdAt":1538939537976,
+  //           "date":"2018-10-7 "
+  //        },
+  //        {  
+  //           "actionTaken":"no-plastic",
+  //           "recordedFrequency":2,
+  //           "pointsEarned":5,
+  //           "carbonPointsEarned":10000,
+  //           "createdAt":1538939556127,
+  //           "date":"2018-10-7 "
+  //        },
+  //        {  
+  //           "actionTaken":"save-water",
+  //           "recordedFrequency":2,
+  //           "pointsEarned":5,
+  //           "carbonPointsEarned":10000,
+  //           "createdAt":1538939575793,
+  //           "date":"2018-10-7 "
+  //        }
+  //     ],
+  //     "totalPoints":15,
+  //     "totalCarbonPoints":30000
+  //     }
   //     ]
   //  }
 
@@ -132,10 +123,7 @@ module.exports.list = (event, context, callback) => {
     console.log("userActionsLength", userActionsLength)
     if (userActionsLength > 0){
       console.log ("entering  loop to calculate total scores for each user")
-      let count = 0;
       for (let i=0; i < userActionsLength; i+=1){
-        count +=1;
-        console.log("count", count)
         const newUserAction = userActions[i];
         const {actionsTaken} = userActions[i];
         let score = 0;
@@ -147,7 +135,6 @@ module.exports.list = (event, context, callback) => {
         // userAction.totalPoints = score;
         newUserAction.totalPoints = score;
         newUserAction.totalCarbonPoints = carbonScore;
-        console.log("newUserAction", newUserAction);
         newUserActions.push(newUserAction);
       }
     }
