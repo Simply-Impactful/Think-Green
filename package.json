@@ -14,6 +14,7 @@
     "invoke-lambda-listUserActions": "aws --profile cis lambda invoke --function-name $npm_package_config_listUserActionsFunctionName --region $npm_package_config_region --payload file://components/userActions/data/list-useractions.json lambda-invoke-response-list.json && cat lambda-invoke-response-list.json",
     "invoke-lambda-createAdminData": "aws --profile cis lambda invoke --function-name $npm_package_config_createAdmindataFunctionName --region $npm_package_config_region --payload file://components/adminData/data/create-adminData.json lambda-invoke-response.json && cat lambda-invoke-response.json",
     "invoke-lambda-listAdminData": "aws --profile cis lambda invoke --function-name $npm_package_config_listAdmindataFunctionName --region $npm_package_config_region --payload file://components/adminData/data/list-adminData.json lambda-invoke-response.json && cat lambda-invoke-response.json",
+    "invoke-lambda-createGroups": "aws --profile cis lambda invoke --function-name $npm_package_config_groupsFunctionName --region $npm_package_config_region --payload file://components/groups/data/create-groups.json lambda-invoke-response.json && cat lambda-invoke-response.json",
     "lint": "eslint --parser-options=\"ecmaVersion:2017\" --ignore-path .gitignore .",
     "lint:fix": "eslint --parser-options=\"ecmaVersion:2017\" --fix --ignore-path .gitignore .",
     "test:unit": "echo no tests yet"
@@ -58,6 +59,7 @@
     "getUserActionsFunctionName": "getUserActions",
     "listUserActionsFunctionName": "listUserActions",
     "createAdmindataFunctionName": "createAdminData",
-    "listAdmindataFunctionName": "listAdminData"
+    "listAdmindataFunctionName": "listAdminData",
+    "groupsFunctionName":"createGroups"
   }
 }

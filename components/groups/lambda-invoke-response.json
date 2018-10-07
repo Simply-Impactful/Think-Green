@@ -1,0 +1,1 @@
+{"statusCode":200,"body":[{"name":"soccer-team","description":"a soccer team","zipCode":"09876","groupAvatar":"http://ww.google.com","groupSubType":"organization","groupType":"non-profit","members":[{"member":"jane","createdDate":1538950806988},{"member":"joe","createdDate":1538950806988},{"member":"john","createdDate":1538950806988}]}]}

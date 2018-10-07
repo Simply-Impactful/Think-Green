@@ -1,6 +1,7 @@
 'use strict'
 
 const AWS = require('aws-sdk') // eslint-disable-line import/no-extraneous-dependencies
+const shape = require('shape-json');
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
@@ -33,27 +34,53 @@ module.exports.get = (event, context, callback) => {
       })
       return
     }
-    console.log("starting computation", result.Items);
+    console.log("result from ddb", result.Items);
     const finalResult = result.Items;
-        
-  let score = 0;
-  let carbonScore = 0;
-  const resultLength = finalResult.length;
-    if (resultLength > 0){
-      console.log ("entering  loop to calculate scores")
-    for (let i=0; i < result.Items.length; i+=1){
-      score += result.Items[i].pointsEarned;
-      carbonScore += result.Items[i].carbonPointsEarned;
-     }
-     finalResult.push({totalPoints: score});
-     finalResult.push({totalCarbonPoints: carbonScore});
-    }
-    console.log("final response", finalResult);
+
+    const scheme = {
+      "$group[userActions](username)": {
+      "username": "username",
+      "email": "email",
+      "zipcode": "zipcode",      
+      "$group[actionsTaken](createdAt)": {
+        "actionTaken": "actionTaken",
+        "recordedFrequency": "recordedFrequency",
+        "pointsEarned": "pointsEarned",
+        "carbonPointsEarned": "carbonPointsEarned",
+        "createdAt": "createdAt",
+        "date": "date"
+        },
+      "totalPoints": "totalPoints",
+      "totalCarbonPoints":"totalCarbonPoints"
+      }
+    };
+    const parsedResult = shape.parse(finalResult, scheme);
+    console.log("hierarchical resultset", JSON.stringify(parsedResult.userActions));// todo-divya test with empty data
+
+    let score = 0;
+    let carbonScore = 0;
+    const { userActions } = parsedResult;
+    const newUserActions = [];
+    const userActionsLength = userActions.length;
+      if (userActionsLength > 0){
+        console.log ("entering  loop to calculate scores")
+        const [ userActionsArr ] = userActions;
+        const  { userAction } = userActionsArr;
+        const { actionsTaken } = userAction.actionsTaken;
+        for (let i=0; i < actionsTaken.length; i+=1){
+          score += actionsTaken[i].pointsEarned;
+          carbonScore += actionsTaken[i].carbonPointsEarned;
+       }
+        userAction.totalPoints = score;
+        userAction.totalCarbonPoints = carbonScore;
+        newUserActions.push(userAction);
+      }
+      console.log("final response", newUserActions);
 
     // create a response
     const response = {
       statusCode: 200,
-      body: (finalResult)
+      body: (newUserActions)
     }
     callback(null, response)
   })

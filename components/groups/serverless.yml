@@ -9,7 +9,7 @@ provider:
   deploymentBucket: 
   
   environment:
-    DYNAMODB_TABLE: groups
+    GROUPS_DYNAMODB_TABLE: ${self:service}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -20,7 +20,7 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
         - dynamodb:BatchWriteItem
-      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.GROUPS_DYNAMODB_TABLE}"
 
 package:
   excludeDevDependencies: true
@@ -79,11 +79,15 @@ resources:
       Properties:
         AttributeDefinitions:
           - AttributeName: name
+            AttributeType: S
+          - AttributeName: members
             AttributeType: S        
         KeySchema:
           - AttributeName: name
             KeyType: HASH
+          - AttributeName: members
+            KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: groups
+        TableName: ${self:provider.environment.GROUPS_DYNAMODB_TABLE}
