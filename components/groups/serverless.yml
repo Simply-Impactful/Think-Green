@@ -19,6 +19,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
+        - dynamodb:BatchWriteItem
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
 
 package:
@@ -39,7 +40,7 @@ functions:
     handler: get.get
     events:
       - http:
-          path: groups/{name}
+          path: groups
           method: get
           cors: true
 
@@ -48,7 +49,7 @@ functions:
     handler: list.list
     events:
       - http:
-          path: groups
+          path: groups/list
           method: get
           cors: true        
 

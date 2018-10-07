@@ -1,1 +1,1 @@
-{"statusCode":200,"body":[]}
+{"statusCode":200,"body":[{"pointsEarned":5,"zipcode":"03054","date":"2018-10-7 ","actionTaken":"no-plastic","updatedAt":1538935536893,"carbonPointsEarned":10000,"createdAt":1538935536893,"username":"divya16","email":"abc@gmail.com","recordedFrequency":2},{"pointsEarned":5,"zipcode":"03054","date":"2018-10-7 ","actionTaken":"no-straws","updatedAt":1538935554255,"carbonPointsEarned":10000,"createdAt":1538935554255,"username":"divya16","email":"abc@gmail.com","recordedFrequency":2},{"totalPoints":10},{"totalCarbonPoints":20000}]}

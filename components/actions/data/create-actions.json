@@ -1,6 +1,6 @@
 {
     "httpMethod": "POST",
-    "body": "{\r\n  \"name\": \"save-paper\",\r\n  \"frequencyCadence\": \"perDay\",\r\n  \"eligiblePoints\": 5,\r\n  \"maxFrequency\": 3,\r\n  \"funFact\": \"Americans use 300000 straws a sec\",\r\n  \"funFactImageUrl\": \"https:\/\/s3.amazonaws.com\/simply-impactful-image-data\/IMG_20180828_152438%5B1%5D.jpg\",\r\n  \"tileIconUrl\": \"https:\/\/s3.amazonaws.com\/simply-impactful-image-data\/IMG_20180828_152438%5B1%5D.jpg\"\r\n}",
+    "body": "{\r\n  \"name\": \"save-paper\",\r\n  \"frequencyCadence\": \"perDay\",\r\n  \"eligiblePoints\": 5,\r\n  \"carbonPoints\": 10000,\r\n  \"maxFrequency\": 3,\r\n  \"funFact\": \"Americans use 300000 straws a sec\",\r\n  \"funFactImageUrl\": \"https:\\\/\\\/s3.amazonaws.com\\\/simply-impactful-image-data\\\/IMG_20180828_152438%5B1%5D.jpg\",\r\n  \"tileIconUrl\": \"https:\\\/\\\/s3.amazonaws.com\\\/simply-impactful-image-data\\\/IMG_20180828_152438%5B1%5D.jpg\",\r\n\"assignmentUrl\": \"https:\/\/static1.squarespace.com\/static\/52cdeef1e4b0874a24181252\/t\/5bb7a1ff104c7b4250121379\/1538761216841\/MathAssignmentEnergy.pdf\"\r\n}",
     
     "path": "/actions",
     "resource": "/",

@@ -43,9 +43,10 @@
     "serverless": "^1.7.0"
   },
   "dependencies": {
-    "uuid": "^2.0.3",
     "aws-sdk": "^2.258.1",
-    "moment": "^2.22.2"
+    "moment": "^2.22.2",
+    "shape-json": "^1.2.4",
+    "uuid": "^2.0.3"
   },
   "config": {
     "region": "us-east-1",

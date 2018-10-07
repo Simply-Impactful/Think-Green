@@ -4,15 +4,22 @@ const AWS = require('aws-sdk') // eslint-disable-line import/no-extraneous-depen
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient()
 
-function validateInput (data) {
-  // TODO add input validation
-  return data
-}
+function validateInput (event) {
+  const req = JSON.parse((event.body));
+  const { name } = req;
+  let bool = true; 
+    if (name === undefined) {
+      console.log('name is undefined');
+      bool = false;
+   }
+   return bool;
+ }
 
 module.exports.create = (event, context, callback) => {
   const timestamp = new Date().getTime()
-  const data = JSON.parse(event.body)
-  if (!validateInput(data)) {
+  const dataBody = JSON.parse(event.body)
+  console.log(`incoming payload${  dataBody}`)
+  if (!validateInput(event)) {
     console.error('Validation Failed')
     callback(null, {
       statusCode: 400,
@@ -23,35 +30,77 @@ module.exports.create = (event, context, callback) => {
   }
 
   // TODO add more attributes
-  const params = {
-    TableName: process.env.DYNAMODB_TABLE_GROUPS,
-    Item: {
-      // id: uuid.v1(),
-      name: data.name, // add more attributes
-      leader: data.username,
-      members: data.groupMembers, // how are users invited to join the group?
-      createdAt: timestamp,
-      updatedAt: timestamp
-    }
+  // const params = {
+  //   TableName: process.env.DYNAMODB_TABLE_GROUPS,
+  //   Item: {
+  //     // id: uuid.v1(),
+  //     name: dataBody.name, // add more attributes
+  //     leader: dataBody.username,
+  //     members: dataBody.groupMembers,
+  //     zipCode: dataBody.zipCode,
+  //     groupType: dataBody.groupType,
+  //     groupSubType: dataBody.groupSubType,
+  //     description: dataBody.description,
+  //     groupAvatar: dataBody.groupAvatar,
+  //     createdAt: timestamp,
+  //     updatedAt: timestamp
+  //   }
+  // }
+
+  const createGroupsArray = [];
+  const arr = [];
+  const members = dataBody.members.split(',');
+  console.log("membersArray", members);
+    
+  for(let i=0; i < members.length; i+=1){
+    arr.push({name:members[i]});
+  const item = {
+    PutRequest : {
+        Item : {
+          'name': dataBody.name, // add more attributes
+          'leader': dataBody.username,
+          'members': arr[i].name,
+          'zipCode': dataBody.zipCode,
+          'groupType': dataBody.groupType,
+          'groupSubType': dataBody.groupSubType,
+          'description': dataBody.description,
+          'groupAvatar': dataBody.groupAvatar,
+          'createdDate': timestamp,
+          'updatedAt': timestamp
+
+        }
+      }
+    };
+    createGroupsArray.push(item);
   }
 
+  const params = {
+    RequestItems : {
+      'cis-serverless-backend-groups' : createGroupsArray
+    }
+  };
+
   // write the todo to the database
-  dynamoDb.put(params, (error) => {
+  dynamoDb.batchWrite(params, (err, data) => {
     // handle potential errors
-    if (error) {
-      console.error(error)
+    if (err) {
+      console.log('Batch create unsuccessful ...');
+      console.error(err, err.stack);
       callback(null, {
-        statusCode: error.statusCode || 501,
+        statusCode: err.statusCode || 501,
         headers: { 'Content-Type': 'text/plain' },
         body: 'Couldn\'t create the group item.'
       })
       return
-    }
+    } 
+      console.log('Batch create successful ...');
+      console.log(data);
+      console.log('Logging any unprocessed records ...', data.UnprocessedItems);
 
     // create a response
     const response = {
       statusCode: 200,
-      body: JSON.stringify(params.Item)
+      body: (data)
     }
     callback(null, response)
   })

@@ -40,10 +40,12 @@ module.exports.create = (event, context, callback) => {
       name: data.name,
       frequencyCadence: data.frequencyCadence,
       eligiblePoints: data.eligiblePoints,
+      carbonPoints: data.carbonPoints,
       maxFrequency: data.maxFrequency,
       funFact: data.funFact,
       funFactImageUrl: data.funFactImageUrl,
       tileIconUrl: data.tileIconUrl,
+      assignmentUrl: data.assignmentUrl,
       createdAt: timestamp,
       updatedAt: timestamp
     }

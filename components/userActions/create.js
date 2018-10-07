@@ -16,7 +16,7 @@ function validateInput (event) {
  }
 
 module.exports.create = (event, context, callback) => {
-  const date = new Date(Date.now()).toLocaleString().slice(0,10);
+  const date = new Date(Date.now()).toLocaleString().slice(0,9);
   const timestamp = new Date().getTime()
   console.log(`incoming event body${  JSON.stringify(event.body)}`)
   console.log(`incoming JSON event${  JSON.stringify(event)}`)
@@ -40,6 +40,7 @@ module.exports.create = (event, context, callback) => {
       email: data.email,
       zipcode: data.zipcode,
       pointsEarned: data.pointsEarned,
+      carbonPointsEarned: data.carbonPointsEarned,
       recordedFrequency: data.recordedFrequency,
       createdAt: timestamp,
       updatedAt: timestamp,

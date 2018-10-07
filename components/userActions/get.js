@@ -37,13 +37,16 @@ module.exports.get = (event, context, callback) => {
     const finalResult = result.Items;
         
   let score = 0;
+  let carbonScore = 0;
   const resultLength = finalResult.length;
     if (resultLength > 0){
-      console.log ("entering for loop")
+      console.log ("entering  loop to calculate scores")
     for (let i=0; i < result.Items.length; i+=1){
       score += result.Items[i].pointsEarned;
+      carbonScore += result.Items[i].carbonPointsEarned;
      }
      finalResult.push({totalPoints: score});
+     finalResult.push({totalCarbonPoints: carbonScore});
     }
     console.log("final response", finalResult);
 
