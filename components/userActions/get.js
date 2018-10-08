@@ -64,9 +64,8 @@ module.exports.get = (event, context, callback) => {
     const userActionsLength = userActions.length;
       if (userActionsLength > 0){
         console.log ("entering  loop to calculate scores")
-        const [ userActionsArr ] = userActions;
-        const  { userAction } = userActionsArr;
-        const { actionsTaken } = userAction.actionsTaken;
+        const [ userAction ] = userActions;
+        const { actionsTaken } = userAction;
         for (let i=0; i < actionsTaken.length; i+=1){
           score += actionsTaken[i].pointsEarned;
           carbonScore += actionsTaken[i].carbonPointsEarned;
