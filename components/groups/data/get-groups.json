@@ -5,7 +5,7 @@
     "path": "/groups",
     "resource": "/",
     "queryStringParameters": {
-        "name": "soccer-team"
+        "name": "class-4"
     },
     "pathParameters": {
     },

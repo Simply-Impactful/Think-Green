@@ -33,9 +33,10 @@ module.exports.list = (event, context, callback) => {
       "groupAvatar": "groupAvatar",
       "groupSubType":"groupSubType",
       "groupType":"groupType",
+      "createdDate": "createdDate",
+      "updatedAt":"updatedAt",
       "$group[members](members)": {
-        "member": "members",
-        "createdDate": "createdDate"
+        "member": "members"
         }
       }
     };
