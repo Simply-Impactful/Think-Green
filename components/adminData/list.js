@@ -1,6 +1,8 @@
 'use strict'
 
 const AWS = require('aws-sdk') // eslint-disable-line import/no-extraneous-dependencies
+const shape = require('shape-json');
+
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient()
 
@@ -22,10 +24,23 @@ module.exports.list = (event, context, callback) => {
       return
     }
 
+    const scheme = {
+      "$group[type](type)": {
+      "type": "type",
+      "createdDate": "createdDate",
+      "updatedAt":"updatedAt",
+      "$group[subType](subType)": {
+        "subType": "subType"
+        }
+      }
+    };
+    const parsedResult = shape.parse(result.Items, scheme);
+    console.log("hierarchical resultset", JSON.stringify(parsedResult.type));// todo-divya test with empty data
+
     // create a response
     const response = {
       statusCode: 200,
-      body: (result.Items)
+      body: (parsedResult.type)
     }
     callback(null, response)
   })

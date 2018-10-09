@@ -1,0 +1,45 @@
+{
+  "name": "user-actions",
+  "version": "1.0.0",
+  "description": "Serverless CRUD services exposing a REST HTTP interface",
+  "scripts": {
+    "clean": "rm -rf node_modules",
+    "deploy:admindata": "npm install && sls deploy --stage cis --aws-profile cis",
+    "invoke-lambda-createAdminData": "aws --profile cis lambda invoke --function-name $npm_package_config_createAdmindataFunctionName --region $npm_package_config_region --payload file://data/create-adminData.json lambda-invoke-response.json && cat lambda-invoke-response.json",
+    "invoke-lambda-listAdminData": "aws --profile cis lambda invoke --function-name $npm_package_config_listAdmindataFunctionName --region $npm_package_config_region --payload file://data/list-adminData.json lambda-invoke-response.json && cat lambda-invoke-response.json"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "pre-commit": "lint-staged",
+  "devDependencies": {},
+  "dependencies": {
+    "aws-sdk": "^2.258.1",
+    "moment": "^2.22.2",
+    "shape-json": "^1.2.4",
+    "uuid": "^2.0.3"
+  },
+  "config": {
+    "region": "us-east-1",
+    "actionsFunctionName": "createActions",
+    "deleteActionsFunctionName": "deleteActions",
+    "getActionsFunctionName": "getActions",
+    "listActionsFunctionName": "listActions",
+    "useractionsFunctionName": "createUserActions",
+    "getUserActionsFunctionName": "getUserActions",
+    "listUserActionsFunctionName": "listUserActions",
+    "createAdmindataFunctionName": "createAdminData",
+    "listAdmindataFunctionName": "listAdminData",
+    "groupsFunctionName": "createGroups",
+    "listGroupsFunctionName": "listGroups",
+    "getGroupsFunctionName": "getGroups"
+  }
+}
