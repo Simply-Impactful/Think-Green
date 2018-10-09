@@ -67,8 +67,10 @@ module.exports.get = (event, context, callback) => {
         const [ userAction ] = userActions;
         const { actionsTaken } = userAction;
         for (let i=0; i < actionsTaken.length; i+=1){
-          score += actionsTaken[i].pointsEarned;
-          carbonScore += actionsTaken[i].carbonPointsEarned;
+          score += Number(actionsTaken[i].pointsEarned);
+          console.log("logging score", score);
+          carbonScore += Number(actionsTaken[i].carbonPointsEarned);
+          console.log("logging carbon score", carbonScore);
        }
         userAction.totalPoints = score;
         userAction.totalCarbonPoints = carbonScore;

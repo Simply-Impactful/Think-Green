@@ -1,6 +1,6 @@
 {
     "httpMethod": "POST",
-    "body": "{\r\n  \"username\": \"divya18\",\r\n  \"actionTaken\": \"no-plastic\",\r\n  \"email\": \"abc@gmail.com\",\r\n  \"zipcode\": \"03054\",\r\n  \"pointsEarned\": 5,\r\n  \"carbonPointsEarned\": 10000,\r\n  \"recordedFrequency\": 2\r\n}",
+    "body": "{\r\n  \"username\": \"divyaM\",\r\n  \"actionTaken\": \"recycle-paper\",\r\n  \"email\": \"abc@gmail.com\",\r\n  \"zipcode\": \"03054\",\r\n  \"pointsEarned\": 5,\r\n  \"carbonPointsEarned\": 10000,\r\n  \"recordedFrequency\": 2\r\n}",
     
     "path": "/userActions",
     "resource": "/",

@@ -129,8 +129,8 @@ module.exports.list = (event, context, callback) => {
         let score = 0;
         let carbonScore = 0;
         for(let act =0; act < actionsTaken.length; act+=1){ 
-          score += actionsTaken[act].pointsEarned;
-          carbonScore += actionsTaken[act].carbonPointsEarned;
+          score += Number(actionsTaken[act].pointsEarned);
+          carbonScore += Number(actionsTaken[act].carbonPointsEarned);
         }
         // userAction.totalPoints = score;
         newUserAction.totalPoints = score;
