@@ -1,1 +1,1 @@
-{"statusCode":200,"body":[{"name":"class-4","leader":"divya19","description":"a soccer team","zipCode":"09876","groupAvatar":"http://ww.google.com","groupSubType":"organization","groupType":"non-profit","createdDate":1539016204765,"updatedAt":1539016204765,"members":[{"member":"divya19"},{"member":"joe"},{"member":"john"}]}]}
+{"statusCode":400,"headers":{"Content-Type":"text/plain"},"body":"Couldn't create the group item."}

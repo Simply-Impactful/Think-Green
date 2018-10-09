@@ -49,9 +49,13 @@ module.exports.create = (event, context, callback) => {
 
   const createGroupsArray = [];
   const arr = [];
-  const members = dataBody.members.split(',');
+  let members = [];
+  if (!dataBody.members === undefined) {
+   members = dataBody.members.split(',');
+  }
   console.log("membersArray", members);
-    
+   
+if (members.length > 0) {
   for(let i=0; i < members.length; i+=1){
     arr.push({name:members[i]});
   const item = {
@@ -73,6 +77,25 @@ module.exports.create = (event, context, callback) => {
     };
     createGroupsArray.push(item);
   }
+} else {
+  const item = {
+    PutRequest : {
+        Item : {
+          'name': dataBody.name, // add more attributes
+          'leader': dataBody.username,
+          'zipCode': dataBody.zipCode,
+          'groupType': dataBody.groupType,
+          'groupSubType': dataBody.groupSubType,
+          'description': dataBody.description,
+          'groupAvatar': dataBody.groupAvatar,
+          'createdDate': timestamp,
+          'updatedAt': timestamp
+
+        }
+      }
+    };
+    createGroupsArray.push(item);
+}
 
   const params = {
     RequestItems : {
