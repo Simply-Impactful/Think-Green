@@ -1,6 +1,6 @@
 {
     "httpMethod": "POST",
-    "body": "{\"name\":\"Emily's VB Team\",\"username\":\"eahendricks6\",\"zipCode\":\"02114\",\"description\":\"VB Team\",\"members\":\"emily,diana,divya\"}",
+    "body": "{\"name\":\"Emily's VB Team\",\"username\":\"eahendricks6\",\"pointsEarned\":\"5\",\"zipCode\":\"02114\",\"description\":\"VB Team\",\"members\":\"emily,diana,divya\"}",
     
     "path": "/groups",
     "resource": "/",
