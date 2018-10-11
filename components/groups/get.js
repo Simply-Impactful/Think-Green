@@ -59,7 +59,8 @@ module.exports.get = (event, context, callback) => {
       "createdDate": "createdDate",
       "updatedAt":"updatedAt",
       "$group[members](members)": {
-        "member": "members"
+        "member": "members",
+        "pointsEarned": "pointsEarned"
         }
       }
     };

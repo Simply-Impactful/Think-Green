@@ -50,9 +50,7 @@ module.exports.create = (event, context, callback) => {
   const createGroupsArray = [];
   const arr = [];
   let members = [];
-  if (!dataBody.members === undefined) {
    members = dataBody.members.split(',');
-  }
   console.log("membersArray", members);
    
 if (members.length > 0) {
@@ -61,9 +59,10 @@ if (members.length > 0) {
   const item = {
     PutRequest : {
         Item : {
-          'name': dataBody.name, // add more attributes
+          'name': dataBody.name,
           'leader': dataBody.username,
           'members': arr[i].name,
+          'pointsEarned': dataBody.pointsEarned,
           'zipCode': dataBody.zipCode,
           'groupType': dataBody.groupType,
           'groupSubType': dataBody.groupSubType,
@@ -77,24 +76,6 @@ if (members.length > 0) {
     };
     createGroupsArray.push(item);
   }
-} else {
-  const item = {
-    PutRequest : {
-        Item : {
-          'name': dataBody.name, // add more attributes
-          'leader': dataBody.username,
-          'zipCode': dataBody.zipCode,
-          'groupType': dataBody.groupType,
-          'groupSubType': dataBody.groupSubType,
-          'description': dataBody.description,
-          'groupAvatar': dataBody.groupAvatar,
-          'createdDate': timestamp,
-          'updatedAt': timestamp
-
-        }
-      }
-    };
-    createGroupsArray.push(item);
 }
 
   const params = {

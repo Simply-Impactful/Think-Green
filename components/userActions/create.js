@@ -1,8 +1,9 @@
 'use strict'
 
 const AWS = require('aws-sdk') // eslint-disable-line import/no-extraneous-dependencies
+// const userGroups = require('./user-groups');
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient()
+const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 function validateInput (event) {
   const req = JSON.parse((event.body));
@@ -60,6 +61,9 @@ module.exports.create = (event, context, callback) => {
       })
       return
     }
+
+    // Check if user exists in a group yet
+  // userGroups.checkUserExistsInGroup(dynamoDb, data.username);
 
     // create a response
     const response = {

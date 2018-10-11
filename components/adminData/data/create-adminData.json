@@ -1,6 +1,6 @@
 {
     "httpMethod": "POST",
-    "body": "[{ \r\n   \"type\": \"School\",\r\n\"subType\":\"Classroom\"\r\n}]",
+    "body": "[{ \r\n   \"type\": \"School\",\r\n   \"subType\": \"Entire Company\"\r\n},\r\n{ \r\n   \"type\": \"For-Profit\",\r\n   \"subType\": \"Department\"\r\n}]",
     
     "path": "/adminData",
     "resource": "/",

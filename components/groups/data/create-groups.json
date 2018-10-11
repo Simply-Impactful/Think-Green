@@ -1,6 +1,6 @@
 {
     "httpMethod": "POST",
-    "body": "{  \r\n   \"name\":\"class-4\",\r\n   \"username\":\"divya19\",\r\n   \"zipCode\":\"09876\",\r\n   \"groupType\":\"non-profit\",\r\n   \"groupSubType\":\"organization\",\r\n   \"description\":\"a soccer team\",\r\n   \"groupAvatar\":\"http:\/\/ww.google.com\"\r\n}",
+    "body": "{\"name\":\"Emily's VB Team\",\"username\":\"eahendricks6\",\"zipCode\":\"02114\",\"description\":\"VB Team\",\"members\":\"emily,diana,divya\"}",
     
     "path": "/groups",
     "resource": "/",

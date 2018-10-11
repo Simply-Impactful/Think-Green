@@ -1,1 +1,1 @@
-{"statusCode":400,"headers":{"Content-Type":"text/plain"},"body":"Couldn't create the group item."}
+{"statusCode":200,"body":{"UnprocessedItems":{}}}
