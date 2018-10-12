@@ -58,6 +58,7 @@ module.exports.get = (event, context, callback) => {
       "groupType":"groupType",
       "createdDate": "createdDate",
       "updatedAt":"updatedAt",
+      "totalPoints": "totalPoints",
       "$group[members](members)": {
         "member": "members",
         "pointsEarned": "pointsEarned"
@@ -67,11 +68,28 @@ module.exports.get = (event, context, callback) => {
     const parsedResult = shape.parse(finalResult, scheme);
     console.log("hierarchical resultset", JSON.stringify(parsedResult.groups));// todo-divya test with empty data
 
+    let score = 0;
+    const { groups } = parsedResult;
+    const newGroups= [];
+    const groupsLength = groups.length;
+      if (groupsLength > 0){
+        console.log ("entering  loop to calculate scores")
+        const [ group ] = groups;
+        const { members } = group;
+        for (let i=0; i < members.length; i+=1){
+          score += Number(members[i].pointsEarned);
+          console.log("logging score", score);
+       }
+        group.totalPoints = score;
+        newGroups.push(group);
+      }
+      console.log("final response", newGroups);
+
 
     // create a response
     const response = {
       statusCode: 200,
-      body: (parsedResult.groups)
+      body: (newGroups)
     }
     callback(null, response)
   })

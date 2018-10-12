@@ -5,14 +5,15 @@ const AWS = require('aws-sdk') // eslint-disable-line import/no-extraneous-depen
 const dynamoDb = new AWS.DynamoDB.DocumentClient()
 
 function validateInput (event) {
-  const req = JSON.parse((event.body));
-  const { name } = req;
-  let bool = true; 
-    if (name === undefined) {
-      console.log('name is undefined');
-      bool = false;
-   }
-   return bool;
+  // const req = JSON.parse((event.body));
+  // const { name } = req;
+  // let bool = true; 
+  //   if (name === undefined) {
+  //     console.log('name is undefined');
+  //     bool = false;
+  //  }
+  //  return bool;
+  return event;
  }
 
 module.exports.create = (event, context, callback) => {
@@ -29,51 +30,32 @@ module.exports.create = (event, context, callback) => {
     return
   }
 
-  // TODO add more attributes
-  // const params = {
-  //   TableName: process.env.DYNAMODB_TABLE_GROUPS,
-  //   Item: {
-  //     // id: uuid.v1(),
-  //     name: dataBody.name, // add more attributes
-  //     leader: dataBody.username,
-  //     members: dataBody.groupMembers,
-  //     zipCode: dataBody.zipCode,
-  //     groupType: dataBody.groupType,
-  //     groupSubType: dataBody.groupSubType,
-  //     description: dataBody.description,
-  //     groupAvatar: dataBody.groupAvatar,
-  //     createdAt: timestamp,
-  //     updatedAt: timestamp
-  //   }
-  // }
-
   const createGroupsArray = [];
-  const arr = [];
-  let members = [];
-   members = dataBody.members.split(',');
-  console.log("membersArray", members);
-   
-if (members.length > 0) {
-  for(let i=0; i < members.length; i+=1){
-    arr.push({name:members[i]});
-  const item = {
-    PutRequest : {
-        Item : {
-          'name': dataBody.name,
-          'leader': dataBody.username,
-          'members': arr[i].name,
-          'pointsEarned': dataBody.pointsEarned,
-          'zipCode': dataBody.zipCode,
-          'groupType': dataBody.groupType,
-          'groupSubType': dataBody.groupSubType,
-          'description': dataBody.description,
-          'groupAvatar': dataBody.groupAvatar,
+  for(let i=0; i<dataBody.length; i+=1){
+    // const arr = [];
+    let members = [];
+    members = dataBody[i].members.split(',');
+    console.log("membersArray", members);   
+    for(let abc=0; abc < members.length; abc+=1){
+      // arr.push({name:members[i]});
+      const item = {
+      PutRequest : {
+          Item : {
+          'name': dataBody[i].name,
+          'leader': dataBody[i].username,
+          'members': members[abc],
+          'pointsEarned': dataBody[i].pointsEarned,
+          'zipCode': dataBody[i].zipCode,
+          'groupType': dataBody[i].groupType,
+          'groupSubType': dataBody[i].groupSubType,
+          'description': dataBody[i].description,
+          'groupAvatar': dataBody[i].groupAvatar,
           'createdDate': timestamp,
           'updatedAt': timestamp
 
+           }
         }
-      }
-    };
+      };
     createGroupsArray.push(item);
   }
 }
