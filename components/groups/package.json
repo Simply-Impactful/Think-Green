@@ -7,7 +7,8 @@
     "deploy:groups": "npm install && sls deploy --stage cis --aws-profile cis",
     "invoke-lambda-createGroups": "aws --profile cis lambda invoke --function-name $npm_package_config_groupsFunctionName --region $npm_package_config_region --payload file://data/create-groups.json lambda-invoke-response.json && cat lambda-invoke-response.json",
     "invoke-lambda-listGroups": "aws --profile cis lambda invoke --function-name $npm_package_config_listGroupsFunctionName --region $npm_package_config_region --payload file://data/list-groups.json lambda-invoke-response.json && cat lambda-invoke-response.json",
-    "invoke-lambda-getGroups": "aws --profile cis lambda invoke --function-name $npm_package_config_getGroupsFunctionName --region $npm_package_config_region --payload file://data/get-groups.json lambda-invoke-response.json && cat lambda-invoke-response.json"
+    "invoke-lambda-getGroups": "aws --profile cis lambda invoke --function-name $npm_package_config_getGroupsFunctionName --region $npm_package_config_region --payload file://data/get-groups.json lambda-invoke-response.json && cat lambda-invoke-response.json",
+    "invoke-lambda-deleteGroups": "aws --profile cis lambda invoke --function-name $npm_package_config_deleteGroupsFunctionName --region $npm_package_config_region --payload file://data/delete-groups.json lambda-invoke-response.json && cat lambda-invoke-response.json"
   },
   "husky": {
     "hooks": {
@@ -41,6 +42,7 @@
     "listAdmindataFunctionName": "listAdminData",
     "groupsFunctionName": "createGroups",
     "listGroupsFunctionName": "listGroups",
-    "getGroupsFunctionName": "getGroups"
+    "getGroupsFunctionName": "getGroups",
+    "deleteGroupsFunctionName": "deleteGroups"
   }
 }

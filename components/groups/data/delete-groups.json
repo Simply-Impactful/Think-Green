@@ -1,8 +1,8 @@
 {
     "httpMethod": "POST",
-    "body": "[{\"name\":\"Team Go\",\"username\":\"Jon Smith\",\"zipCode\":\"02114\",\"pointsEarned\":\"5\",\"description\":\"Pokemon\",\"members\":\"emily diana divya\"},\r\n{\"name\":\"Team Go Go\",\"username\":\"Jon Smith\",\"zipCode\":\"02114\",\"pointsEarned\":\"5\",\"description\":\"Pokemon\",\"members\":\"emily diana divya\"}]",
+    "body": " { \r\n      \"name\":\"Team Go\",\r\n      \"members\":[  \r\n         {  \r\n            \"member\":\"divya\"\r\n         },\r\n         {  \r\n            \"member\":\"divya\"\r\n         },\r\n         {  \r\n            \"member\":\"emily\"\r\n         }\r\n      ]\r\n }",
     
-    "path": "/groups",
+    "path": "/groups/delete",
     "resource": "/",
     "queryStringParameters": {
     },
@@ -46,7 +46,7 @@
             "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36",
             "user": ""
         },
-        "resourcePath": "/groups",
+        "resourcePath": "/groups/delete",
         "httpMethod": "POST"
     }
 }

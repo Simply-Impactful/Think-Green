@@ -67,7 +67,7 @@ functions:
     handler: delete.delete
     events:
       - http:
-          path: groups/{name}
+          path: groups/delete
           method: delete
           cors: true         
 
