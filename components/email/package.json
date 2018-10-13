@@ -1,0 +1,61 @@
+{
+  "name": "cis-backend",
+  "version": "1.0.0",
+  "description": "Serverless CRUD services exposing a REST HTTP interface",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "scripts": {
+    "clean": "rm -rf node_modules",
+    "deploy:sendemail": "sls deploy --stage cis --aws-profile cis",
+    "invoke-lambda-sendEmail": "aws --profile cis lambda invoke --function-name $npm_package_config_sendEmailFunctionName --region $npm_package_config_region --payload file://data/send-email.json lambda-invoke-response.json && cat lambda-invoke-response.json",
+    "lint": "eslint --parser-options=\"ecmaVersion:2017\" --ignore-path .gitignore .",
+    "lint:fix": "eslint --parser-options=\"ecmaVersion:2017\" --fix --ignore-path .gitignore .",
+    "test:unit": "echo no tests yet"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "pre-commit": "lint-staged",
+  "devDependencies": {
+    "eslint": "^5.6.0",
+    "eslint-config-okonet": "^5.0.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "husky": "^1.0.0-rc.15",
+    "lint-staged": "^7.3.0",
+    "serverless": "^1.7.0",
+    "nodemailer": "^4.6.8"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.258.1",
+    "moment": "^2.22.2",
+    "shape-json": "^1.2.4",
+    "uuid": "^2.0.3"
+  },
+  "config": {
+    "region": "us-east-1",
+    "actionsFunctionName": "createActions",
+    "deleteActionsFunctionName": "deleteActions",
+    "getActionsFunctionName": "getActions",
+    "listActionsFunctionName": "listActions",
+    "useractionsFunctionName": "createUserActions",
+    "getUserActionsFunctionName": "getUserActions",
+    "listUserActionsFunctionName": "listUserActions",
+    "createAdmindataFunctionName": "createAdminData",
+    "listAdmindataFunctionName": "listAdminData",
+    "groupsFunctionName":"createGroups",
+    "sendEmailFunctionName": "sendEmail"
+  }
+}
