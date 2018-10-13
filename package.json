@@ -15,6 +15,8 @@
     "invoke-lambda-createAdminData": "aws --profile cis lambda invoke --function-name $npm_package_config_createAdmindataFunctionName --region $npm_package_config_region --payload file://components/adminData/data/create-adminData.json lambda-invoke-response.json && cat lambda-invoke-response.json",
     "invoke-lambda-listAdminData": "aws --profile cis lambda invoke --function-name $npm_package_config_listAdmindataFunctionName --region $npm_package_config_region --payload file://components/adminData/data/list-adminData.json lambda-invoke-response.json && cat lambda-invoke-response.json",
     "invoke-lambda-createGroups": "aws --profile cis lambda invoke --function-name $npm_package_config_groupsFunctionName --region $npm_package_config_region --payload file://components/groups/data/create-groups.json lambda-invoke-response.json && cat lambda-invoke-response.json",
+    "invoke-lambda-createLevelData": "aws --profile cis lambda invoke --function-name $npm_package_config_createLeveldataFunctionName --region $npm_package_config_region --payload file://components/levelData/data/create-levelData.json lambda-invoke-response.json && cat lambda-invoke-response.json",
+    "invoke-lambda-listLevelData": "aws --profile cis lambda invoke --function-name $npm_package_config_listLeveldataFunctionName --region $npm_package_config_region --payload file://components/levelData/data/list-levelData.json lambda-invoke-response.json && cat lambda-invoke-response.json",
     "lint": "eslint --parser-options=\"ecmaVersion:2017\" --ignore-path .gitignore .",
     "lint:fix": "eslint --parser-options=\"ecmaVersion:2017\" --fix --ignore-path .gitignore .",
     "test:unit": "echo no tests yet"
@@ -61,6 +63,8 @@
     "listUserActionsFunctionName": "listUserActions",
     "createAdmindataFunctionName": "createAdminData",
     "listAdmindataFunctionName": "listAdminData",
-    "groupsFunctionName":"createGroups"
+    "groupsFunctionName":"createGroups",
+    "createLeveldataFunctionName": "createLevelData",
+    "listLeveldataFunctionName": "listLevelData"
   }
 }
