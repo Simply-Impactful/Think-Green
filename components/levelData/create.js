@@ -6,10 +6,11 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient() // todo
 
 function validateInput (event) {
 	const req = JSON.parse((event.body))
-	const pointsRange = req[0].pointsRange
+	const min = req[0].min
+	const max = req[0].max
 	let bool = true 
-	if (pointsRange === undefined) {
-		console.log('pointsRange is undefined')
+	if (min === undefined && max === undefined) {
+		console.log('min and max ranges are undefined')
 		bool = false
 	}
 	return bool
@@ -34,7 +35,8 @@ module.exports.create = (event, context, callback) => {
 		const item = {
 			PutRequest : {
 				Item : {
-					'pointsRange' : dataBody[i].pointsRange,
+					'min' : dataBody[i].min,
+					'max' : dataBody[i].max,
 					'statusGraphicUrl' : dataBody[i].statusGraphicUrl,
 					'status' : dataBody[i].status,
 					'createdDate': timestamp,

@@ -78,12 +78,12 @@ resources:
       DeletionPolicy: Retain
       Properties:
         AttributeDefinitions:
-          - AttributeName: pointsRange
-            AttributeType: S
+          - AttributeName: min
+            AttributeType: N
           - AttributeName: status
             AttributeType: S       
         KeySchema:
-          - AttributeName: pointsRange
+          - AttributeName: min
             KeyType: HASH
           - AttributeName: status
             KeyType: RANGE

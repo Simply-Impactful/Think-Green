@@ -32,16 +32,16 @@ function generateError (code, err) {
 }
 
 function generateEmailParams (body) {
-	const { firstName, lastName, content, email } = JSON.parse(body)
-	console.log( firstName, lastName, content, email )
-	if (!(firstName && lastName && content && email)) {
+	const { firstName, lastName, content, senderEmail } = JSON.parse(body)
+	console.log( firstName, lastName, content, senderEmail )
+	if (!(firstName && lastName && content && senderEmail)) {
 		throw new Error('Missing parameters! Make sure to add parameters \'email\', \'name\', \'content\'.')
 	}
 
 	return {
 		Source: myEmail,
-		Destination: { ToAddresses: [email] },
-		ReplyToAddresses: [email],
+		Destination: { ToAddresses: [myEmail] },
+		ReplyToAddresses: [senderEmail],
 		Message: {
 			Body: {
 				Text: {

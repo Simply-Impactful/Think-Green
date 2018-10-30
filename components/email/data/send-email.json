@@ -1,6 +1,6 @@
 {
     "httpMethod": "POST",
-    "body": "{\"firstName\":\"Divya\",\"lastName\":\"Mahajan\",\"content\":\"hello\",\"email\":\"italladdsup@changeissimple.org\"}",
+    "body": "{\"firstName\":\"Divya\",\"lastName\":\"Mahajan\",\"content\":\"hello\",\"senderEmail\":\"italladdsup@changeissimple.org\"}",
     
     "path": "/email/send",
     "resource": "/",
