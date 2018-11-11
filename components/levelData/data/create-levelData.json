@@ -1,6 +1,6 @@
 {
     "httpMethod": "POST",
-    "body": "[{ \r\n   \"min\": 0,\r\n   \"max\": 1000,\r\n  \"statusGraphicUrl\": \"https:\/\/s3.amazonaws.com\/simply-impactful-image-data\/Levels\/grasshopperforapp.png\",\r\n   \"status\": \"Grasshopper\"\r\n},\r\n{ \r\n   \"min\": 1001,\r\n   \"max\": 2000,\r\n  \"statusGraphicUrl\": \"https:\/\/s3.amazonaws.com\/simply-impactful-image-data\/Levels\/beeforapp.png\",\r\n   \"status\": \"Bee\"\r\n}]",
+    "body": "[{ \r\n   \"min\": 0,\r\n   \"max\": 1000,\r\n  \"statusGraphicUrl\": \"https:\/\/s3.amazonaws.com\/simply-impactful-image-data\/Levels\/grasshopperforapp.png\",\r\n  \"description\": \"This animal is....\",\r\n   \"status\": \"Grasshopper\"\r\n},\r\n{ \r\n   \"min\": 2001,\r\n   \"max\": 3000,\r\n  \"statusGraphicUrl\": \"https:\/\/s3.amazonaws.com\/simply-impactful-image-data\/Levels\/beeforapp.png\",\r\n  \"description\": \"This animal is....\",\r\n   \"status\": \"Monkey\"\r\n}]",
     
     "path": "/levelData",
     "resource": "/",

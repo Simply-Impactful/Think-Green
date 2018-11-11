@@ -35,10 +35,11 @@ module.exports.create = (event, context, callback) => {
 		const item = {
 			PutRequest : {
 				Item : {
-					'min' : dataBody[i].min,
-					'max' : dataBody[i].max,
+					'min' : Number(dataBody[i].min),
+					'max' : Number(dataBody[i].max),
 					'statusGraphicUrl' : dataBody[i].statusGraphicUrl,
 					'status' : dataBody[i].status,
+					'description': dataBody[i].description,
 					'createdDate': timestamp,
 					'updatedAt': timestamp
 
@@ -63,7 +64,7 @@ module.exports.create = (event, context, callback) => {
 			callback(null, {
 				statusCode: err.statusCode || 501,
 				headers: { 'Content-Type': 'text/plain' },
-				body: 'Couldn\'t create the adminData item.'
+				body: 'Couldn\'t create the levelData items.'
 			})
 			return
 		} 
