@@ -63,7 +63,7 @@
     "listUserActionsFunctionName": "listUserActions",
     "createAdmindataFunctionName": "createAdminData",
     "listAdmindataFunctionName": "listAdminData",
-    "groupsFunctionName":"createGroups",
+    "groupsFunctionName": "createGroups",
     "createLeveldataFunctionName": "createLevelData",
     "listLeveldataFunctionName": "listLevelData"
   }
