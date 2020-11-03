@@ -34,6 +34,11 @@ functions:
           path: groups
           method: post
           cors: true
+          authorizer:
+            name: GroupAuthorizer
+            arn: arn:aws:cognito-idp:us-east-1:745539300020:userpool/us-east-1_Iz6DhxAP7
+            identitySource: method.request.header.Authorization
+            type: token
 
   get:
     name: getGroups
@@ -43,6 +48,11 @@ functions:
           path: groups
           method: get
           cors: true
+          authorizer:
+            name: GroupAuthorizer
+            arn: arn:aws:cognito-idp:us-east-1:745539300020:userpool/us-east-1_Iz6DhxAP7
+            identitySource: method.request.header.Authorization
+            type: token
 
   list:
     name: listGroups
@@ -51,7 +61,12 @@ functions:
       - http:
           path: groups/list
           method: get
-          cors: true        
+          cors: true
+          authorizer:
+            name: GroupAuthorizer
+            arn: arn:aws:cognito-idp:us-east-1:745539300020:userpool/us-east-1_Iz6DhxAP7
+            identitySource: method.request.header.Authorization
+            type: token        
 
   update:
     name: updateGroups
@@ -61,6 +76,11 @@ functions:
           path: groups/{name}
           method: put
           cors: true
+          authorizer:
+            name: GroupAuthorizer
+            arn: arn:aws:cognito-idp:us-east-1:745539300020:userpool/us-east-1_Iz6DhxAP7
+            identitySource: method.request.header.Authorization
+            type: token
 
   delete:
     name: deleteGroups
@@ -69,25 +89,4 @@ functions:
       - http:
           path: groups/delete
           method: delete
-          cors: true         
-
-resources:
-  Resources:
-    GroupsDynamoDbTable:
-      Type: 'AWS::DynamoDB::Table'
-      DeletionPolicy: Retain
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: name
-            AttributeType: S
-          - AttributeName: members
-            AttributeType: S        
-        KeySchema:
-          - AttributeName: name
-            KeyType: HASH
-          - AttributeName: members
-            KeyType: RANGE
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
-        TableName: ${self:provider.environment.GROUPS_DYNAMODB_TABLE}
+          cors: true     

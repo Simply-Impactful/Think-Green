@@ -34,6 +34,11 @@ functions:
           path: userActions
           method: post
           cors: true
+          authorizer:
+            name: userActionsAuthorizer
+            arn: arn:aws:cognito-idp:us-east-1:745539300020:userpool/us-east-1_Iz6DhxAP7
+            identitySource: method.request.header.Authorization
+            type: token
 
   get:
     name: getUserActions
@@ -43,6 +48,11 @@ functions:
           path: userActions/{username}
           method: get
           cors: true
+          authorizer:
+            name: userActionsAuthorizer
+            arn: arn:aws:cognito-idp:us-east-1:745539300020:userpool/us-east-1_Iz6DhxAP7
+            identitySource: method.request.header.Authorization
+            type: token
 
   list:
     name: listUserActions
@@ -51,7 +61,12 @@ functions:
       - http:
           path: userActions
           method: get
-          cors: true        
+          cors: true
+          authorizer:
+            name: userActionsAuthorizer
+            arn: arn:aws:cognito-idp:us-east-1:745539300020:userpool/us-east-1_Iz6DhxAP7
+            identitySource: method.request.header.Authorization
+            type: token        
 
   # update:
   #   name: updateUserActions

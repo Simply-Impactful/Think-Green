@@ -4,7 +4,7 @@ const AWS = require('aws-sdk') // eslint-disable-line import/no-extraneous-depen
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient()
 
-function validateInput (event) {
+function validateInput(event) {
 	// const req = JSON.parse((event.body));
 	// const { name } = req;
 	// let bool = true; 
@@ -19,7 +19,7 @@ function validateInput (event) {
 module.exports.create = (event, context, callback) => {
 	const timestamp = new Date().getTime()
 	const dataBody = JSON.parse(event.body)
-	console.log(`incoming payload${  dataBody}`)
+	console.log(`incoming payload${dataBody}`)
 	if (!validateInput(event)) {
 		console.error('Validation Failed')
 		callback(null, {
@@ -31,16 +31,16 @@ module.exports.create = (event, context, callback) => {
 	}
 
 	const createGroupsArray = []
-	for(let i=0; i<dataBody.length; i+=1){
+	for (let i = 0; i < dataBody.length; i += 1) {
 		// const arr = [];
 		let members = []
 		members = dataBody[i].members.split(' ')
-		console.log('membersArray', members)   
-		for(let abc=0; abc < members.length; abc+=1){
+		console.log('membersArray', members)
+		for (let abc = 0; abc < members.length; abc += 1) {
 			// arr.push({name:members[i]});
 			const item = {
-				PutRequest : {
-					Item : {
+				PutRequest: {
+					Item: {
 						'name': dataBody[i].name,
 						'leader': dataBody[i].username,
 						'members': members[abc],
@@ -61,8 +61,8 @@ module.exports.create = (event, context, callback) => {
 	}
 
 	const params = {
-		RequestItems : {
-			'cis-serverless-backend-groups' : createGroupsArray
+		RequestItems: {
+			'cis-serverless-backend-groups': createGroupsArray
 		}
 	}
 
@@ -78,7 +78,7 @@ module.exports.create = (event, context, callback) => {
 				body: 'Couldn\'t create the group item.'
 			})
 			return
-		} 
+		}
 		console.log('Batch create successful ...')
 		console.log(data)
 		console.log('Logging any unprocessed records ...', data.UnprocessedItems)
@@ -86,7 +86,12 @@ module.exports.create = (event, context, callback) => {
 		// create a response
 		const response = {
 			statusCode: 200,
-			body: (data)
+			headers: {
+				'Access-Control-Allow-Headers': '*',
+				'Access-Control-Allow-Origin': '*',
+				'Access-Control-Allow-Methods': '*'
+			},
+			body: JSON.stringify(data)
 		}
 		callback(null, response)
 	})

@@ -34,6 +34,11 @@ functions:
           path: LevelData
           method: post
           cors: true
+          authorizer:
+            name: LevelAuthorizer
+            arn: arn:aws:cognito-idp:us-east-1:745539300020:userpool/us-east-1_Iz6DhxAP7
+            identitySource: method.request.header.Authorization
+            type: token
 
   # get:
   #   name: getLevelData
@@ -51,7 +56,12 @@ functions:
       - http:
           path: LevelData
           method: get
-          cors: true        
+          cors: true
+          authorizer:
+            name: LevelAuthorizer
+            arn: arn:aws:cognito-idp:us-east-1:745539300020:userpool/us-east-1_Iz6DhxAP7
+            identitySource: method.request.header.Authorization
+            type: token        
 
   # update:
   #   name: updateLevelData
@@ -69,25 +79,4 @@ functions:
   #     - http:
   #         path: LevelData/{name}
   #         method: delete
-  #         cors: true         
-
-resources:
-  Resources:
-    UDynamoDbTable:
-      Type: 'AWS::DynamoDB::Table'
-      DeletionPolicy: Retain
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: min
-            AttributeType: N
-          - AttributeName: status
-            AttributeType: S       
-        KeySchema:
-          - AttributeName: min
-            KeyType: HASH
-          - AttributeName: status
-            KeyType: RANGE
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
-        TableName: ${self:provider.environment.LEVEL_DATA_DYNAMODB_TABLE}
+  #         cors: true

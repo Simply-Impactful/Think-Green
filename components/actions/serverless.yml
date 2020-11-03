@@ -51,7 +51,7 @@ functions:
       - http:
           path: actions
           method: get
-          cors: true        
+          cors: true      
 
   update:
     name: updateActions
@@ -69,21 +69,4 @@ functions:
       - http:
           path: actions/delete
           method: post
-          cors: true         
-
-resources:
-  Resources:
-    ActionsDynamoDbTable:
-      Type: 'AWS::DynamoDB::Table'
-      DeletionPolicy: Retain
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: name
-            AttributeType: S        
-        KeySchema:
-          - AttributeName: name
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
-        TableName: ${self:provider.environment.ACTIONS_DYNAMODB_TABLE}
+          cors: true

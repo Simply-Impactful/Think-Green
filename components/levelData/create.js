@@ -4,11 +4,11 @@ const AWS = require('aws-sdk') // eslint-disable-line import/no-extraneous-depen
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient() // todo
 
-function validateInput (event) {
+function validateInput(event) {
 	const req = JSON.parse((event.body))
 	const min = req[0].min
 	const max = req[0].max
-	let bool = true 
+	let bool = true
 	if (min === undefined && max === undefined) {
 		console.log('min and max ranges are undefined')
 		bool = false
@@ -19,7 +19,7 @@ function validateInput (event) {
 module.exports.create = (event, context, callback) => {
 	const timestamp = new Date().getTime()
 	const dataBody = JSON.parse(event.body)
-	console.log(`incoming payload${  dataBody}`)
+	console.log(`incoming payload${dataBody}`)
 	if (!validateInput(event)) {
 		console.error('Validation Failed')
 		callback(null, {
@@ -31,14 +31,14 @@ module.exports.create = (event, context, callback) => {
 	}
 
 	const createItemsArray = []
-	for(let i=0; i<dataBody.length; i+=1){
+	for (let i = 0; i < dataBody.length; i += 1) {
 		const item = {
-			PutRequest : {
-				Item : {
-					'min' : Number(dataBody[i].min),
-					'max' : Number(dataBody[i].max),
-					'statusGraphicUrl' : dataBody[i].statusGraphicUrl,
-					'status' : dataBody[i].status,
+			PutRequest: {
+				Item: {
+					'min': Number(dataBody[i].min),
+					'max': Number(dataBody[i].max),
+					'statusGraphicUrl': dataBody[i].statusGraphicUrl,
+					'status': dataBody[i].status,
 					'description': dataBody[i].description,
 					'createdDate': timestamp,
 					'updatedAt': timestamp
@@ -50,8 +50,8 @@ module.exports.create = (event, context, callback) => {
 	}
 
 	const params = {
-		RequestItems : {
-			'serverless-backend-levelData' : createItemsArray
+		RequestItems: {
+			'serverless-backend-levelData': createItemsArray
 		}
 	}
 
@@ -67,16 +67,22 @@ module.exports.create = (event, context, callback) => {
 				body: 'Couldn\'t create the levelData items.'
 			})
 			return
-		} 
+		}
 		console.log('Batch create successful ...')
 		console.log(data)
 		console.log('Logging any unprocessed records ...', data.UnprocessedItems)
-    
+
 
 		// create a response
 		const response = {
 			statusCode: 200,
-			body: (data)
+			// body: (data)
+			headers: {
+				'Access-Control-Allow-Headers': '*',
+				'Access-Control-Allow-Origin': '*',
+				'Access-Control-Allow-Methods': '*'
+			},
+			body: JSON.stringify(data)
 		}
 		callback(null, response)
 	})

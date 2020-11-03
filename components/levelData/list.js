@@ -27,7 +27,13 @@ module.exports.list = (event, context, callback) => {
 		// create a response
 		const response = {
 			statusCode: 200,
-			body: (result.Items)
+			// body: (result.Items)
+			headers: {
+				'Access-Control-Allow-Headers': '*',
+				'Access-Control-Allow-Origin': '*',
+				'Access-Control-Allow-Methods': '*'
+			},
+			body: JSON.stringify(result.Items)
 		}
 		callback(null, response)
 	})
