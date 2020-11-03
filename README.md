@@ -14,11 +14,10 @@ npm install
 
 ## Deploy
 
-In order to deploy the endpoint simply run
+In order to deploy the endpoint - go to specific component(for instance we you want to deploy groups, cd into groups and run the below command)
 
-```bash
-serverless deploy
-```
+sls deploy --stage cis
+
 
 The expected result should be similar to:
 
